@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                   <img src="{{Storage::url('public/logo.png')}}" alt="Logo">
+                   <img src="{{asset('images/logo.png')}}" alt="Logo">
                 </div>
 
                 <div class="links">
