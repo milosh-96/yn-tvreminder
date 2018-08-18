@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
+    
+    <style>
+        .header {
+            min-height: 50px;
+            background: linear-gradient(90deg, #EB5757 0%, #9B51E0 100%);
+        }
+        .user {
+            padding: 9px;
+            font-size: 16px;
+            color: #fff;
+        }
+        .circle {
+            background: #fff;
+            width: 32px;
+            height: 32px;
+            line-height: 32px;
+            border-radius: 16px;
+            color: #333333;
+            text-align: center;
+        }
+        .header-area {
+            width: 100%;
+            height: 50px;
+        }
+    </style>
+</head>
+<body style="background: #f2f2f2;">
+    <div class="container-fluid mb-2" style="background: #333;height: 50px;">
+        <div class="row">
+            <div class="cell" style="line-height: 50px;">
+                <img src="/html/logo.png" height="30px">
+            </div>
+        </div>
+    </div>
+    <div class="container pb-5" style="background: #fff">
+        <div class="row header">
+            <div class="cell-3">
+                <div class="user">
+                    <div class="d-inline-block">
+                        <div class="circle">
+                            <i class="fa fa-user"></i>
+                        </div>
+                    </div>
+                    <div class="d-inline-block">Miloš</div>
+                </div>
+            </div>
+            <div class="cell-9 header-area">
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="cell-3">
+                    <ul class="v-menu">
+                            <li class="menu-title">General</li>
+                            <li><a href="#"><span class="fa fa-user icon"></span> Home</a></li>
+                            <li class="menu-title">User Actions</li>
+                            <li><a href="#"><span class="fa fa-plus icon icon"></span> Add New Show</a></li>
+                            <li><a href="#"><span class="fa fa-list icon icon"></span> List All</a></li>
+                            <li><a href="#"><span class="fa fa-question icon icon"></span> Help</a></li>
+                            <li class="menu-title">Support</li>
+                            <li>
+                                <a href="#" data-hotkey="Alt+F1">Community</a>
+                                <ul class="v-menu" data-role="dropdown">
+                                    <li><a href="#">Blog</a></li>
+                                    <li><a href="#">Github</a></li>
+                                    <li><a href="#">Forum</a></li>
+                                    <li class="divider"></li>
+                                    <li class="p-2 bg-light">
+                                        <button class="button square primary"><span class="mif-target"></span></button>
+                                        <button class="button square success"><span class="mif-apps"></span></button>
+                                        <button class="button square alert"><span class="mif-file-code"></span></button>
+                                        <button class="button square warning"><span class="mif-download"></span></button>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-title">Shop</li>
+                            <li><a href="#"><span class="mif-cart icon"></span> Cart</a></li>
+                        </ul>
+            </div>
+            
+            <div class="cell-9">
+                <div class="row">
+                    <div class="cell-4 mb-2">
+                            <div class="card">
+                                    <div class="card-header">
+                                        Card header
+                                    </div>
+                                    <div class="card-content p-2">
+                                        Card with header and footer...
+                                    </div>
+                                    <div class="card-footer">
+                                        Card Footer
+                                    </div>
+                                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+</body>
+</html>
