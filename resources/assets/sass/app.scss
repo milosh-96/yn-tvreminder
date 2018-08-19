@@ -1,14 +1,69 @@
 
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-
-// Variables
-@import 'variables';
-
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import '~normalize.css/normalize';
+html {
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.content_padd {
+  padding: 0 10px;
+}
 
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+header {
+  width: 100%;
+  background: #fff;
+  height: 50px;
+  line-height: 50px;
+  vertical-align: middle;
+  margin-bottom: 50px;
+  .logo {
+    padding-top:5px;
+    > img {
+      height: 40px;
+    }
+  }
+}
+.inner-wrapper {
+  width:960px;
+  margin: 0 auto;
+}
+
+#boxed {
+  @extend .inner-wrapper;
+  background: #fff;
+  min-height: 1000px;
+  div {
+    // padding: 10px;
+  }
+}
+
+#left_col {
+  width: 200px;
+  float: left;
+}
+#middle_col {
+  width: 960-400px;
+  float: left;
+}
+#right_col {
+  width: 200px;
+  float: left;
+}
+
+
+.v-menu {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    li.section-title {
+      font-size: 12px;
+      font-weight: bold;
+      padding: 3px;
+      background: #f2f2f2;
+      border-bottom: 1px solid #ccc;
+    }
+  }
 }
