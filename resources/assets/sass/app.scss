@@ -1,3 +1,5 @@
+@import "~bootstrap/scss/bootstrap";
+
 body {
   background: #f2f2f2;
 }
@@ -6,6 +8,10 @@ body {
 }
 .topbar {
   background: #333;height: 50px !important;
+  line-height: 50px;
+  .logo {
+    height: 50px;
+  }
 }
 .header {
   min-height: 50px;
@@ -28,4 +34,34 @@ body {
 .header-area {
   width: 100%;
   height: 50px;
+}
+
+ul {
+  .section-title {
+    font-size:12px;
+    padding: 5px 10px;
+    background: #f2f2f2;
+  }
+}
+
+.form-group {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f2f2f2;
+  label,.hint {
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+  label {
+    font-weight: bold;
+    @extend .m-0;
+    @extend .p-0;
+  }
+  .hint {
+    color: #ccc;
+    &:before {
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      content: "\f054 ";
+    }
+  }
 }
