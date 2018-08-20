@@ -22,3 +22,5 @@ Route::prefix('user')->group(function() {
 Route::prefix('shows')->group(function() {
     Route::get('add-new','ShowController@create')->name('show.add');
 });
+
+Auth::routes();
