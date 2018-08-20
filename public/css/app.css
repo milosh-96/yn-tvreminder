@@ -10479,6 +10479,7 @@ body {
 
 .page {
   background: #fff;
+  min-height: 1000px;
 }
 
 .topbar {
