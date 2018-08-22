@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="col">
-    <h3 class="mt-5">Register</h3>
+    <h3>Register</h3>
    <div class="form-group mt-1">
        <label for="user_name">User Name</label>
        <span class="hint">Your unique name, or nick name</span>
@@ -23,8 +23,20 @@
        <span class="hint">Your E-mail; Activation Link will be sent here!</span>
        <input type="email" class="form-control" name="email" id="email">
     </div>
+    <div class="form-group">
+        <label for="accept_terms">I agree to the <a href="#">Terms Of Services</a></label>
+        <input type="checkbox" name="accept_terms" id="accept_terms">
+    </div>
+    <div class="form-group">
+        <button class="btn btn-gradient">Register!</button>
+    </div>
 </div>
 @endsection
 
 @section('left_side')
+    <div class="card">
+        <div class="card-body">
+            If you already have an account, <a href="{{route('login')}}">Login Here</a>
+        </div>
+    </div>
 @endsection
