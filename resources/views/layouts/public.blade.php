@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">    <title>Document</title>
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
-    
+   
 </head>
 <body>
     <div class="container-fluid mb-2 topbar">
@@ -47,5 +47,6 @@
         <small>{{date("Y")}} - TVReminder. All rights are reserved.</small>
     </footer>
     <script src="{{asset('js/app.js')}}"></script>
+    @yield('scripts')
 </body>
 </html>

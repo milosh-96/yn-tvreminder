@@ -7,4 +7,11 @@
     <li class="list-group-item"><a href="#"><span class="fa fa-question icon icon"></span> Help</a></li>
     <li class="list-group-item section-title">Suggestions</li>
     <li class="list-group-item"><i class="fa fa-star"></i> Most Popular Shows</li>
+    <li class="list-group-item section-title">User Settings</li>
+    <li class="list-group-item">
+        <form action="{{route('logout')}}" method="POST">
+            @csrf
+            <button class="btn btn-xs btn-gradient">Logout</button>
+        </form>
+    </li>
     </ul>

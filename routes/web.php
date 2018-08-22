@@ -11,21 +11,16 @@
 |
 */
 
-if(auth()->user()) {
-    Route::get('/', function () {
-        return view('layouts.user');    
-    });
-    Route::prefix('user')->group(function() {
 
-    });
-    Route::prefix('shows')->group(function() {
-        Route::get('add-new','ShowController@create')->name('show.add');
-    });
-}
-else {
-    Route::get('/', function () {
-        return view('layouts.public');    
-    });
-}
 
+Route::get('/', function () {
+    return view('layouts.user');    
+})->name('index');
+Route::prefix('user')->group(function() {});
+Route::prefix('shows')->group(function() {
+    Route::get('add-new','ShowController@create')->name('show.add');
+});
 Auth::routes();
+    
+    
+    
