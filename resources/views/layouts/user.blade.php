@@ -30,7 +30,7 @@
                             <i class="fa fa-user"></i>
                         </div>
                     </div>
-                    <div class="d-inline-block">Miloš</div>
+                    <div class="d-inline-block">{{auth()->user()->name()}}</div>
                 </div>
             </div>
             <div class="col-9 header-area">

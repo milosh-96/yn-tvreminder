@@ -52,7 +52,7 @@
 @endsection
 
 @section('left_side')
-    <div class="card">
+    <div class="card mb-3">
         <div class="card-body">
             If you already have an account, <a href="{{route('login')}}">Login Here</a>
         </div>

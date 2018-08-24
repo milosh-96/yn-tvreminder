@@ -26,6 +26,7 @@
        <div class="row mt-4">
             <div class="col-12 col-md-3 order-2 order-md-1">
                 @yield('left_side')
+                @include('user.partials.user-menu')
             </div>
             
             <div class="col-12 col-md-7 mb-5 mb-md-0 order-1 order-md-2">

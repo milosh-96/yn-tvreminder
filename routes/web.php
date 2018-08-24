@@ -14,7 +14,12 @@
 
 
 Route::get('/', function () {
-    return view('layouts.user');    
+    if(!auth()->user()) {
+        return view('layouts.public');    
+    }
+    else {
+        return view('layouts.user');
+    }
 })->name('index');
 Route::prefix('user')->group(function() {});
 Route::prefix('shows')->group(function() {
