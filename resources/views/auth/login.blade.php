@@ -15,7 +15,11 @@
             <span class="hint">Your Password</span>
             <input type="password" class="form-control" name="password" id="password">
         </div>
-        
+        <div class="form-group">
+            <label for="remember">Remember me</label>
+            <span class="hint">Do you want to remain logged in after you close the browser?</span>
+            <input id="remember" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
+        </div>
         <div class="form-group">
                 <button type="submit" class="btn btn-gradient">
                     {{ __('Login') }}
