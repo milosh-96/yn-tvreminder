@@ -8,12 +8,12 @@
         <div class="form-group mt-1">
             <label for="user_name">User Name</label>
             <span class="hint">Your User name</span>
-            <input type="text" class="form-control" name="user_name" id="user_name">
+            <input type="text" class="form-control" name="user_name" id="user_name" value="{{old('user_name')}}">
         </div>
         <div class="form-group mt-1">
             <label for="password">Password</label>
             <span class="hint">Your Password</span>
-            <input type="text" class="form-control" name="password" id="password">
+            <input type="password" class="form-control" name="password" id="password">
         </div>
         
         <div class="form-group">
