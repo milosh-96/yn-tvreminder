@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Show;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ShowController extends Controller
 {
@@ -64,7 +65,11 @@ class ShowController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $slug = str_slug($request->title);
+        $hash = substr(Str::uuid($request->title . '-' . auth()->user()->id . '-' . date("Y-m-d H:i")),0,7);
+        $obj = array_merge($request->all(),["user_id"=>auth()->user()->id,"hash"=>$hash,"slug"=>$slug]);
+        return Show::create($obj);
+
     }
 
     /**

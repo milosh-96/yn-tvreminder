@@ -15,6 +15,7 @@ class CreateShowsTable extends Migration
     {
         Schema::create('shows', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('hash',8);
             $table->timestamps();
             $table->string('title');
             $table->integer('user_id')->unsigned();

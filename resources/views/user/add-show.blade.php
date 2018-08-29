@@ -2,11 +2,12 @@
 @section('content')
 
 <div class="col-12">
-    <form action="">
+    <form action="{{route('show.store')}}" method="POST">
+        @csrf
         <div class="form-group">
             <label for="title"><i class="fa fa-font"></i>Title</label>
             <span class="hint">You can type anything that will help you to remember this show</span>
-            <input id="title" type="text" class="form-control form-control-lg"> 
+            <input id="title" name="title" type="text" class="form-control form-control-lg"> 
         </div>
         <div class="form-group">
             <label for="description"><i class="fa fa-comment"></i> Description</label>
