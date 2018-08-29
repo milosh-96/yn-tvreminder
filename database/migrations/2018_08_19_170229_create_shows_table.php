@@ -16,6 +16,12 @@ class CreateShowsTable extends Migration
         Schema::create('shows', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->string('title');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('slug')->unique();
+            $table->text('description')->nullable();
+            $table->string('cover_url')->nullable();
         });
     }
 
