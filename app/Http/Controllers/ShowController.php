@@ -71,10 +71,14 @@ class ShowController extends Controller
         $hash = substr(Str::uuid($request->title . '-' . auth()->user()->id . '-' . date("Y-m-d H:i")),0,7);
         $obj = array_merge($request->except(['_token','_method']),["user_id"=>auth()->user()->id,"hash"=>$hash,"slug"=>$slug]);
 
-        if($type == "update") {
-            return $show->update($obj);
+        if($type = "update") {
+            $show->title = $request->title;
+            $show->description = $request->description;
+            $show->cover_url = $request->cover_url;
+            $show->save();
+            return $show;
         }
-        return Show::create($obj);
+         return Show::create($obj);
     }
     public function store(Request $request)
     {
@@ -120,8 +124,9 @@ class ShowController extends Controller
      */
     public function update(Request $request, Show $show,$hash)
     {
-        $show_get = $show->findByHash($hash);
-        $show = $this->storeShowInDatabase($request,"update",$show_get);
+        $show = $show->findByHash($hash);
+        $show = $this->storeShowInDatabase($request,"update",$show);
+        session()->flash('msg',$show->title . ' has been successfully updated.');
         return redirect()->route('user.library');    }
 
     /**

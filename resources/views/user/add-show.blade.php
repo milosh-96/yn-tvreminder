@@ -16,6 +16,15 @@
             <textarea name="description" id="description" class="form-control">{{$formValues->type == 'update' ? $show->description : old('description')}}</textarea>
         </div>
         <div class="form-group">
+            <label for="cover_url"><i class="fa fa-image"></i> Cover</label>
+            <span class="hint">Enter a URL of cover picture</span>
+            <input id="cover_url" name="cover_url" type="text" class="form-control form-control-sm" value="{{$formValues->type == 'update' ? $show->cover_url : old('cover_url')}}"> 
+
+            <div id="image_preview" class="mt-4">
+                <img id="image" width="250px" />
+            </div>
+        </div>
+        <div class="form-group">
             @if($formValues->type == "create")
                 <button class="btn btn-gradient">Add to Library</button>
                 <button class="btn btn-gradient">Add and Schedule</button>
@@ -37,4 +46,18 @@
     </div>
 </div>
 
+@endsection
+
+@section('footer_scripts')
+    @parent
+    @if($formValues->type = "update" && $show->cover_url != NULL) 
+    <script>
+       $("#image_preview").children("#image").attr("src",$("#cover_url").val());
+    </script>
+    @endif
+    <script>
+        $("#cover_url").change(function() {
+            $("#image_preview").children("#image").attr("src",$(this).val());
+        });
+    </script>
 @endsection
