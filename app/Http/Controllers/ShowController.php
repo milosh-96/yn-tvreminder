@@ -63,13 +63,17 @@ class ShowController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    private function storeShowInDatabase($request) {
         $slug = str_slug($request->title);
         $hash = substr(Str::uuid($request->title . '-' . auth()->user()->id . '-' . date("Y-m-d H:i")),0,7);
         $obj = array_merge($request->all(),["user_id"=>auth()->user()->id,"hash"=>$hash,"slug"=>$slug]);
         return Show::create($obj);
-
+    }
+    public function store(Request $request)
+    {
+        $show = $this->storeShowInDatabase($request);
+        session()->flash('msg',$show->title . ' has been successfully added to your library.');
+        return redirect()->route('user.library');
     }
 
     /**

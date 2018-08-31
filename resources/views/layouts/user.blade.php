@@ -43,7 +43,7 @@
                 @include('user.partials.user-menu')
             </div>
             
-            <div class="col-12 col-md-7 offset-md-1 mb-5 mb-md-0 order-1 order-md-2">
+            <div class="col-12 col-md-9 mb-5 mb-md-0 order-1 order-md-2">
                 <div class="row">
                     @yield('content')
                 </div>

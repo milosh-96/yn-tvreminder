@@ -21,7 +21,9 @@ Route::get('/', function () {
         return view('layouts.user');
     }
 })->name('index');
-Route::prefix('user')->group(function() {});
+Route::prefix('user')->group(function() {
+    Route::get('library','UserController@library')->name('user.library');
+});
 Route::prefix('shows')->group(function() {
     Route::get('add-new','ShowController@create')->name('show.add');
     Route::post('/','ShowController@store')->name('show.store');
