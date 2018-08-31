@@ -2,21 +2,27 @@
 @section('content')
 
 <div class="col-12">
-    <form action="{{route('show.store')}}" method="POST">
+    <form action="{{$formValues->form_route}}" method="POST">
         @csrf
+        <input type="hidden" name="_method" value="{{$formValues->form_method}}">
         <div class="form-group">
             <label for="title"><i class="fa fa-font"></i>Title</label>
             <span class="hint">You can type anything that will help you to remember this show</span>
-            <input id="title" name="title" type="text" class="form-control form-control-lg"> 
+            <input id="title" name="title" type="text" class="form-control form-control-lg" value="{{$formValues->type == 'update' ? $show->title : old('title')}}"> 
         </div>
         <div class="form-group">
             <label for="description"><i class="fa fa-comment"></i> Description</label>
             <span class="hint">How would you describe this show? Be descriptive, or ignore this field :)</span>
-            <textarea name="description" id="description" class="form-control"></textarea>
+            <textarea name="description" id="description" class="form-control">{{$formValues->type == 'update' ? $show->description : old('description')}}</textarea>
         </div>
         <div class="form-group">
-            <button class="btn btn-gradient">Add to Library</button>
-            <button class="btn btn-gradient">Add and Schedule</button>
+            @if($formValues->type == "create")
+                <button class="btn btn-gradient">Add to Library</button>
+                <button class="btn btn-gradient">Add and Schedule</button>
+            @else
+                <button class="btn btn-gradient">Update</button>
+                <button class="btn btn-gradient">Update and Schedule</button>
+            @endif
         </div>
         
     </form>

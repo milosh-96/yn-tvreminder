@@ -21,12 +21,17 @@ Route::get('/', function () {
         return view('layouts.user');
     }
 })->name('index');
+
 Route::prefix('user')->group(function() {
     Route::get('library','UserController@library')->name('user.library');
 });
-Route::prefix('shows')->group(function() {
+
+Route::prefix('show')->group(function() {
     Route::get('add-new','ShowController@create')->name('show.add');
     Route::post('/','ShowController@store')->name('show.store');
+    Route::get('edit/{hash}','ShowController@edit')->name('show.edit');
+    Route::put('/{hash}','ShowController@update')->name('show.update');
+
 });
 Auth::routes();
     

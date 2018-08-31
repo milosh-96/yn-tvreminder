@@ -26,6 +26,9 @@ class ShowController extends Controller
     public function create()
     {
         $formValues = array(
+            'type'=>"create",
+            'form_route'=>route("show.store"),
+            'form_method'=>"POST",
             'days' => $this->formValueGenerator(32,1,true),
             'months'=>$this->formValueGenerator(13,1,true),
             'years'=>$this->formValueGenerator(date("Y")+6,date("Y")),
@@ -63,10 +66,14 @@ class ShowController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    private function storeShowInDatabase($request) {
+    private function storeShowInDatabase($request,$type,$show = null) {
         $slug = str_slug($request->title);
         $hash = substr(Str::uuid($request->title . '-' . auth()->user()->id . '-' . date("Y-m-d H:i")),0,7);
-        $obj = array_merge($request->all(),["user_id"=>auth()->user()->id,"hash"=>$hash,"slug"=>$slug]);
+        $obj = array_merge($request->except(['_token','_method']),["user_id"=>auth()->user()->id,"hash"=>$hash,"slug"=>$slug]);
+
+        if($type == "update") {
+            return $show->update($obj);
+        }
         return Show::create($obj);
     }
     public function store(Request $request)
@@ -93,9 +100,15 @@ class ShowController extends Controller
      * @param  \App\Show  $show
      * @return \Illuminate\Http\Response
      */
-    public function edit(Show $show)
+    public function edit(Show $show,$hash)
     {
-        //
+        $show = $show->findByHash($hash);
+        $formValues = array(
+            'type'=>"update",
+            'form_route'=>route("show.update",$show->hash),
+            'form_method'=>"PUT"
+        );
+        return view('user.add-show')->with(['formValues'=>(object) $formValues,'show'=>$show]);
     }
 
     /**
@@ -105,10 +118,11 @@ class ShowController extends Controller
      * @param  \App\Show  $show
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Show $show)
+    public function update(Request $request, Show $show,$hash)
     {
-        //
-    }
+        $show_get = $show->findByHash($hash);
+        $show = $this->storeShowInDatabase($request,"update",$show_get);
+        return redirect()->route('user.library');    }
 
     /**
      * Remove the specified resource from storage.
