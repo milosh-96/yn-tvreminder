@@ -30,8 +30,11 @@ Route::prefix('show')->group(function() {
     Route::get('add-new','ShowController@create')->name('show.add');
     Route::post('/','ShowController@store')->name('show.store');
     Route::get('edit/{hash}','ShowController@edit')->name('show.edit');
-    Route::put('/{hash}','ShowController@update')->name('show.update');
+    Route::prefix('{hash}')->group(function() {
+        Route::put('/','ShowController@update')->name('show.update');
+        Route::get('/set-reminder','ReminderController@create')->name('reminder.create');
 
+    });
 });
 Auth::routes();
     

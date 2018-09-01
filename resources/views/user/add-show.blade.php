@@ -18,7 +18,7 @@
         <div class="form-group">
             <label for="cover_url"><i class="fa fa-image"></i> Cover</label>
             <span class="hint">Enter a URL of cover picture</span>
-            <input id="cover_url" name="cover_url" type="text" class="form-control form-control-sm" value="{{$formValues->type == 'update' ? $show->cover_url : old('cover_url')}}"> 
+            <input id="cover_url" name="cover_url" type="text" autocomplete="off" class="form-control form-control-sm" value="{{$formValues->type == 'update' ? $show->cover_url : old('cover_url')}}"> 
 
             <div id="image_preview" class="mt-4">
                 <img id="image" width="250px" />
@@ -50,7 +50,7 @@
 
 @section('footer_scripts')
     @parent
-    @if($formValues->type = "update" && $show->cover_url != NULL) 
+    @if(($formValues->type = "update" && isset($show->cover_url) && $show->cover_url != NULL)) 
     <script>
        $("#image_preview").children("#image").attr("src",$("#cover_url").val());
     </script>

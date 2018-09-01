@@ -66,11 +66,15 @@ class ShowController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    private function storeShowInDatabase($request,$type,$show = null) {
+    private function storeShowInDatabase($request,$type = "create",$show = null) {
         $slug = str_slug($request->title);
         $hash = substr(Str::uuid($request->title . '-' . auth()->user()->id . '-' . date("Y-m-d H:i")),0,7);
         $obj = array_merge($request->except(['_token','_method']),["user_id"=>auth()->user()->id,"hash"=>$hash,"slug"=>$slug]);
 
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required',
+        ]);
         if($type = "update") {
             $show->title = $request->title;
             $show->description = $request->description;
