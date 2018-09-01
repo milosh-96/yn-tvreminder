@@ -13,15 +13,17 @@
 
 
 
+// Route::get('/', function () {
+//     if(!auth()->user()) {
+//         return view('layouts.public');    
+//     }
+//     else {
+//         return view('layouts.user');
+//     }
+// })->name('index');
 Route::get('/', function () {
-    if(!auth()->user()) {
-        return view('layouts.public');    
-    }
-    else {
-        return view('layouts.user');
-    }
+    return view('layouts.handler');
 })->name('index');
-
 Route::prefix('user')->group(function() {
     Route::get('library','UserController@library')->name('user.library');
 });

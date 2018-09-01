@@ -1,4 +1,4 @@
-@extends('layouts.public')
+@extends('layouts.handler')
 
 @section('content')
 <div class="col">
