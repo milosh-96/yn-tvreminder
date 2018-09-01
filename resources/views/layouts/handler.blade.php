@@ -13,11 +13,16 @@
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
 </head>
 <body>
-@include('layouts.shared.header-bar');
+@if((request()->route()->getName() != 'login' && request()->route()->getName() != 'register'))
+@include('layouts.shared.header-bar')
 @if(auth()->check())
 @include('layouts.user')
 @else
 @include('layouts.public')
+@endif
+@else 
+@include('layouts.login-register-layout')
+
 @endif
 
     <footer>
