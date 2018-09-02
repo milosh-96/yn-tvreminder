@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
 </head>
-<body>
+<body id="@yield('body_id','main')">
 @if((request()->route()->getName() != 'login' && request()->route()->getName() != 'register'))
 @include('layouts.shared.header-bar')
 @if(auth()->check())
@@ -22,7 +22,6 @@
 @endif
 @else 
 @include('layouts.login-register-layout')
-
 @endif
 
     <footer>

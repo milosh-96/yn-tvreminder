@@ -10473,9 +10473,25 @@ a.text-dark:focus {
   }
 }
 
+html {
+  height: 100%;
+}
+
 body {
-  background: #f2f2f2;
   color: #2c3e50;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+body#main {
+  background: #f2f2f2;
+}
+
+body#login-register {
+  background: #2c3e50;
+  background: linear-gradient(94deg, #2c3e50 50%, #3a526a 50%, #2c3e50 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#2c3e50",endColorstr="#2c3e50",GradientType=1);
 }
 
 .btn {
@@ -10485,6 +10501,13 @@ body {
 .page {
   background: #fff;
   min-height: 1000px;
+  overflow: hidden;
+}
+
+.page.login {
+  min-height: 300px;
+  border-radius: 7px;
+  border: 1px solid #ccc;
 }
 
 .topbar {

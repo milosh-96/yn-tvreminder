@@ -1,5 +1,5 @@
 @extends('layouts.handler')
-
+@section('body_id','login-register')
 @section('content')
 <div class="col">
     <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
