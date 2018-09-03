@@ -21,9 +21,7 @@
 //         return view('layouts.user');
 //     }
 // })->name('index');
-Route::get('/', function () {
-    return view('layouts.handler');
-})->name('index');
+Route::get('/','UserController@library')->name('index');
 Route::prefix('user')->group(function() {
     Route::get('library','UserController@library')->name('user.library');
 });

@@ -8583,7 +8583,8 @@ button.bg-dark:focus {
 }
 
 .m-0,
-.form-group label {
+.form-group label,
+.form-check label {
   margin: 0 !important;
 }
 
@@ -8728,7 +8729,8 @@ button.bg-dark:focus {
 }
 
 .p-0,
-.form-group label {
+.form-group label,
+.form-check label {
   padding: 0 !important;
 }
 
@@ -10511,9 +10513,15 @@ body#login-register {
 }
 
 .topbar {
-  background: #2c3e50;
+  background: #fff;
   height: 50px !important;
   line-height: 50px;
+}
+
+.topbar.second-topbar {
+  background: #2c3e50;
+  color: #fff;
+  height: 40px !important;
 }
 
 .topbar .logo {
@@ -10560,20 +10568,25 @@ ul .section-title {
 }
 
 .form-group label,
-.form-group .hint {
+.form-group .hint,
+.form-check label,
+.form-check .hint {
   text-transform: uppercase;
   font-size: 12px;
 }
 
-.form-group label {
+.form-group label,
+.form-check label {
   font-weight: bold;
 }
 
-.form-group .hint {
+.form-group .hint,
+.form-check .hint {
   color: #ccc;
 }
 
-.form-group .hint:before {
+.form-group .hint:before,
+.form-check .hint:before {
   font-family: 'Font Awesome 5 Free';
   font-weight: 900;
   content: "\F054   ";

@@ -1,4 +1,3 @@
-<div class="row">
                 <div class="col-12 mb-2">
                     <div class="tyle-selector py-2">
                         <label>One-Time</label>
@@ -82,4 +81,3 @@
                     </div>
                 </div>
                 
-            </div>

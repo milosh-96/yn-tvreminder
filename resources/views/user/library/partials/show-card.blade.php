@@ -6,9 +6,14 @@
         <h5 class="card-title">{{$show->title}}</h5>
         <p>{{$show->description}}</p>
 
-        <div>
+        <div class="row">
+           <div class="col-6">
             <small><a href="{{route('show.edit',$show->hash)}}">Edit</a></small>
-            <small>Delete</small>
+                <small>Delete</small>
+            </div>
+            <div class="col-6 text-right">
+                <a href="{{route('reminder.create',$show->hash)}}"><i class="fa fa-clock"></i> Schedule</a>
+            </div>
         </div>
     </div>
 </div>
