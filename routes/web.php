@@ -21,7 +21,9 @@
 //         return view('layouts.user');
 //     }
 // })->name('index');
-Route::get('/','UserController@library')->name('index');
+
+Route::get('/','HomeController@index')->name('index');
+
 Route::prefix('user')->group(function() {
     Route::get('library','UserController@library')->name('user.library');
 });
@@ -33,6 +35,7 @@ Route::prefix('show')->group(function() {
     Route::prefix('{hash}')->group(function() {
         Route::put('/','ShowController@update')->name('show.update');
         Route::get('/set-reminder','ReminderController@create')->name('reminder.create');
+        Route::post('/set-reminder','ReminderController@store')->name('reminder.store');
 
     });
 });

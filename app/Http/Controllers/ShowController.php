@@ -13,6 +13,13 @@ class ShowController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         //
@@ -75,7 +82,7 @@ class ShowController extends Controller
             'title' => 'required|max:255',
             'description' => 'required',
         ]);
-        if($type = "update") {
+        if($type == "update") {
             $show->title = $request->title;
             $show->description = $request->description;
             $show->cover_url = $request->cover_url;

@@ -1,10 +1,13 @@
-                <div class="col-12 mb-2">
+@section('user_title',$formValues->show->title)
+<div class="col-12 mb-2">
+<form action="{{route('reminder.store',$formValues->show->hash)}}" method="POST">
+@csrf
                     <div class="tyle-selector py-2">
                         <label>One-Time</label>
-                        <input type="radio" name="repeat_type" onclick="activateOneTime()">
+                        <input type="radio" name="repeat_type" value="onetime" onclick="activateOneTime()">
                         <span class="px-3">or</span>  
                         <label>Weekly</label>
-                        <input type="radio" checked name="repeat_type" onclick="activateWeekly()">
+                        <input type="radio" checked name="repeat_type" value="weekly" onclick="activateWeekly()">
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
@@ -40,7 +43,7 @@
                     <div id="days-picker" class="days-picker" style="min-height: 100px">
                         <select name="days[]" multiple id="days" size="7" class="form-control">
                             @foreach($formValues->weekly_days as $w_day)
-                            <option value="{{$w_day}}" @if($formValues->current_day_in_week == $w_day) selected @endif>{{$formValues->day_names[$w_day-1]}}</option>
+                            <option value="{{strtolower($formValues->day_names[$w_day-1])}}" @if($formValues->current_day_in_week == $w_day) selected @endif>{{$formValues->day_names[$w_day-1]}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -79,5 +82,12 @@
                         <label for="public">Public</label>
                         <span class="hint"><a href="#">What does this mean?</a></span>
                     </div>
+                    <hr>
+                    <div class="form-group">
+                        <button class="btn btn-gradient">Schedule</button>
+                    </div>
+                    </form>
                 </div>
                 
+
+

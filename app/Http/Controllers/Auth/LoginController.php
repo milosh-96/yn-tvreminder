@@ -35,7 +35,7 @@ class LoginController extends Controller
     */
     public function __construct()
     {
-        $this->redirectTo = url()->previous();
+        $this->redirectTo = route('index');
         $this->middleware('guest')->except('logout','isLoggedIn');
     }
     

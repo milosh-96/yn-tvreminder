@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Reminder;
 use Illuminate\Http\Request;
+use App\Show;
 
 class ReminderController extends Controller
 {
@@ -21,9 +22,11 @@ class ReminderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Show $show,$hash)
     {
+        $show = $show->findByHash($hash);
         $formValues = array(
+            'show'=>$show,
             'type'=>"create",
             'form_route'=>route("show.store"),
             'form_method'=>"POST",
@@ -54,7 +57,17 @@ class ReminderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $object = null;
+        if($request->repeat_type == "weekly") {
+            $days = array("monday"=>false,"tuesday"=>false,"wednesday"=>false,"thursday"=>false,"friday"=>false,"saturday"=>false,"sunday"=>false);
+
+            foreach($request->days as $day) {
+                $days[$day] = true;
+            }
+            $object = array_merge($request->all(),$days);
+        }   
+        return $object;
+        return $request->all();
     }
 
     /**
