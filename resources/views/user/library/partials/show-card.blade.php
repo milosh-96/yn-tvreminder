@@ -12,7 +12,13 @@
                 <small>Delete</small>
             </div>
             <div class="col-6 text-right">
+                @if($show->hasReminders())
+                @include('reminders.remindersListModal')
+                <a href="#" data-toggle="modal" data-target="#reminderModal-{{$show->hash}}"><i class="fa fa-check"></i> <small>Scheduled</small></a>
+
+                @else
                 <a href="{{route('reminder.create',$show->hash)}}"><i class="fa fa-clock"></i> Schedule</a>
+                @endif
             </div>
         </div>
     </div>

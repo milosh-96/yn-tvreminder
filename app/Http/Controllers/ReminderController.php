@@ -55,19 +55,21 @@ class ReminderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Show $show,Request $request,$hash)
     {
+        $show = $show->findByHash($hash);
         $object = null;
+        $fields = array("tv"=>$request->tv_channel,"show_id"=>$show->id,"user_id"=>$show->user_id,"start_time"=>$request->hour . ':' . $request->minute);
         if($request->repeat_type == "weekly") {
             $days = array("monday"=>false,"tuesday"=>false,"wednesday"=>false,"thursday"=>false,"friday"=>false,"saturday"=>false,"sunday"=>false);
 
             foreach($request->days as $day) {
                 $days[$day] = true;
             }
-            $object = array_merge($request->all(),$days);
+            $object = array_merge($fields,$days);
         }   
-        return $object;
-        return $request->all();
+        Reminder::create($object);
+        return redirect()->route('index');
     }
 
     /**

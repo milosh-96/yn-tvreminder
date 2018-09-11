@@ -14,3 +14,8 @@
     </div>
 </div>
 @endsection
+
+
+@section('footer_scripts')
+@parent
+@endsection

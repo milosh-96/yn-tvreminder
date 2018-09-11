@@ -40,6 +40,8 @@ class CreateRemindersTable extends Migration
             $table->time('end_time')->nullable();
             $table->integer('duration')->unsigned()->nullable();
 
+            $table->string('tv');
+
             $table->boolean('email_notification')->default(true);
             $table->boolean('push_notification')->default(true);
             $table->boolean('sms_notification')->default(false);
