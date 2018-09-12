@@ -28,21 +28,4 @@
             
         </div>
     </div>
-    <footer>
-        <small>{{date("Y")}} - TVReminder. All rights are reserved.</small>
-    </footer>
-    <script src="{{asset('js/app.js')}}"></script>
-    <script>
-        function activateOneTime() {
-            $("#date-picker").show();
-            $("#days-picker").hide();
-        }
-        function activateWeekly() {
-            $("#date-picker").hide();
-            $("#days-picker").show();
-        }
-    </script>
-    @yield('footer_scripts')
-    
-</body>
-</html>
+  

@@ -50,7 +50,7 @@
 
 @section('footer_scripts')
     @parent
-    @if(($formValues->type = "update" && isset($show->cover_url) && $show->cover_url != NULL)) 
+    @if(($formValues->type == "update" && isset($show->cover_url) && $show->cover_url != NULL)) 
     <script>
        $("#image_preview").children("#image").attr("src",$("#cover_url").val());
     </script>
@@ -60,4 +60,6 @@
             $("#image_preview").children("#image").attr("src",$(this).val());
         });
     </script>
+
+ 
 @endsection

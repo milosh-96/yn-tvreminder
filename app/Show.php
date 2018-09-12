@@ -18,7 +18,14 @@ class Show extends Model
         }
         return false;
     }
+
+    //filtered by authenticated user //
     public function reminders() {
+        return $this->hasMany('App\Reminder')->where('user_id','=',auth()->user()->id);
+    }
+
+    // not filtered by authenticated user //
+    public function allReminders() {
         return $this->hasMany('App\Reminder');
     }
 }

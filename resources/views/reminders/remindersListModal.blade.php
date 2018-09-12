@@ -8,11 +8,15 @@
                 </button>
             </div>
             <div class="modal-body text-left">
-                <p>Modal body text goes here.</p>
+                <ul class="list-group">
+                    @foreach($show->reminders as $reminder)
+                    <li class="list-group-item">{{$reminder->display()}}</li>
+                    @endforeach
+                </ul>
             </div>
             <div class="modal-footer">
+                <a href="{{route('reminder.create',$show->hash)}}" class="btn btn-sm btn-primary">Add New Reminder</a>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>

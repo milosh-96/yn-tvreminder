@@ -28,6 +28,6 @@
         <small>{{date("Y")}} - TVReminder. All rights are reserved.</small>
     </footer>
     <script src="{{asset('js/app.js')}}"></script>
-    @yield('scripts')
+    @yield('footer_scripts')
 </body>
 </html>
