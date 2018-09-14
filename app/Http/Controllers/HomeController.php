@@ -32,11 +32,12 @@ class HomeController extends Controller
      */
     public function index(Reminder $rem,User $user)
     {
-        $rem = $rem->first();
+        $rem = $rem->find(4);
 
         $show = $rem->getShow;
         $user = $rem->getUser;
         $user->notify(new ShowReminder($show,$rem));
+
 
        return $this->switcher();
     }

@@ -41,11 +41,11 @@ class ShowReminder extends Notification
      */
     public function toMail($notifiable)
     {
+        $show=$this->show;
+        $reminder=$this->reminder;
         return (new MailMessage)
                     ->subject('Reminder: '. $this->show->title)
-                    ->line($this->show->title)
-                    ->action("Starts at ". $this->reminder->formattedTime() . " on " . $this->reminder->tv, url(route('index')))
-                    ->line('Thank you for using our application!');
+                   ->view('emails.show-reminder',compact('show','reminder'));
     }
 
     /**

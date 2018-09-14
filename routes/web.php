@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Mail\Markdown;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,5 @@ Route::prefix('show')->group(function() {
     });
 });
 Auth::routes();
-    
     
     
