@@ -9,27 +9,27 @@ use Illuminate\Support\Str;
 class ShowController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-     
+    * Display a listing of the resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
+    
+    
     public function __construct()
     {
         $this->middleware('auth');
     }
-
+    
     public function index()
     {
         //
     }
-
+    
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Show the form for creating a new resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function create()
     {
         $formValues = array(
@@ -55,7 +55,7 @@ class ShowController extends Controller
         
         return view('user.add-show')->with(['formValues'=>(object) $formValues]);
     }
-
+    
     private function formValueGenerator($max,$init,$leadingZero = false) {
         $temp_array = array();
         for($i = $init;$i < $max;$i++) {
@@ -66,88 +66,96 @@ class ShowController extends Controller
         }
         return $temp_array;
     }
-
+    
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    * Store a newly created resource in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
     private function storeShowInDatabase($request,$type = "create",$show = null) {
         $slug = str_slug($request->title);
         $hash = substr(Str::uuid($request->title . '-' . auth()->user()->id . '-' . date("Y-m-d H:i")),0,7);
         $obj = array_merge($request->except(['_token','_method']),["user_id"=>auth()->user()->id,"hash"=>$hash,"slug"=>$slug]);
-
+        
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'description' => 'required',
-        ]);
-        if($type == "update") {
-            $show->title = $request->title;
-            $show->description = $request->description;
-            $show->cover_url = $request->cover_url;
-            $show->save();
-            return $show;
+            ]);
+            if($type == "update") {
+                $show->title = $request->title;
+                $show->description = $request->description;
+                $show->cover_url = $request->cover_url;
+                $show->save();
+                return $show;
+            }
+            return Show::create($obj);
         }
-         return Show::create($obj);
+        public function store(Request $request)
+        {
+            
+            $show = $this->storeShowInDatabase($request);
+            session()->flash('msg',$show->title . ' has been successfully added to your library.');
+            if(isset($request->schedule) && $request->schedule == true) {
+                return redirect()->route('reminder.create',$show->hash);
+            }
+            return redirect()->route('user.library');
+        }
+        
+        /**
+        * Display the specified resource.
+        *
+        * @param  \App\Show  $show
+        * @return \Illuminate\Http\Response
+        */
+        public function show(Show $show)
+        {
+            //
+        }
+        
+        /**
+        * Show the form for editing the specified resource.
+        *
+        * @param  \App\Show  $show
+        * @return \Illuminate\Http\Response
+        */
+        public function edit(Show $show,$hash)
+        {
+            $show = $show->findByHash($hash);
+            $formValues = array(
+                'type'=>"update",
+                'form_route'=>route("show.update",$show->hash),
+                'form_method'=>"PUT"
+            );
+            return view('user.add-show')->with(['formValues'=>(object) $formValues,'show'=>$show]);
+        }
+        
+        /**
+        * Update the specified resource in storage.
+        *
+        * @param  \Illuminate\Http\Request  $request
+        * @param  \App\Show  $show
+        * @return \Illuminate\Http\Response
+        */
+        public function update(Request $request, Show $show,$hash)
+        {
+            $show = $show->findByHash($hash);
+            $show = $this->storeShowInDatabase($request,"update",$show);
+            session()->flash('msg',$show->title . ' has been successfully updated.');
+            if(isset($request->schedule) && $request->schedule == true) {
+                return redirect()->route('reminder.create',$show->hash);
+            }
+            return redirect()->route('user.library');   
+        }
+        
+        /**
+        * Remove the specified resource from storage.
+        *
+        * @param  \App\Show  $show
+        * @return \Illuminate\Http\Response
+        */
+        public function destroy(Show $show)
+        {
+            //
+        }
     }
-    public function store(Request $request)
-    {
-        $show = $this->storeShowInDatabase($request);
-        session()->flash('msg',$show->title . ' has been successfully added to your library.');
-        return redirect()->route('user.library');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Show  $show
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Show $show)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Show  $show
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Show $show,$hash)
-    {
-        $show = $show->findByHash($hash);
-        $formValues = array(
-            'type'=>"update",
-            'form_route'=>route("show.update",$show->hash),
-            'form_method'=>"PUT"
-        );
-        return view('user.add-show')->with(['formValues'=>(object) $formValues,'show'=>$show]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Show  $show
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Show $show,$hash)
-    {
-        $show = $show->findByHash($hash);
-        $show = $this->storeShowInDatabase($request,"update",$show);
-        session()->flash('msg',$show->title . ' has been successfully updated.');
-        return redirect()->route('user.library');    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Show  $show
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Show $show)
-    {
-        //
-    }
-}

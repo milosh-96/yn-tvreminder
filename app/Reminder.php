@@ -11,7 +11,18 @@ class Reminder extends Model
 
     protected $fillable = ["monday","tuesday","wednesday","thursday","friday","saturday","sunday","tv","weekly","user_id","show_id","start_time","end_time"];
 
+    public function getShow() {
+        return $this->hasOne('App\Show','id','show_id');
+    }
+    public function getUser() {
+        return $this->hasOne('App\User','id','user_id');
+    }
 
+    public function formattedTime() {
+        return date("H:i",strtotime($this->start_time));
+    }
+
+    
     public function display() {
         
         $output = '';

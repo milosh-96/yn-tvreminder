@@ -11,7 +11,7 @@ class Show extends Model
     public function findByHash($hash) {
         return Show::where('hash','=',$hash)->first();
     }
-
+   
     public function hasReminders() {
         if(count($this->reminders) > 0) {
             return true;

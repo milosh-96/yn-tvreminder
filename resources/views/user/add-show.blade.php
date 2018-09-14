@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="col-12">
-    <form action="{{$formValues->form_route}}" method="POST">
+    <form method="POST">
         @csrf
         <input type="hidden" name="_method" value="{{$formValues->form_method}}">
         <div class="form-group">
@@ -26,11 +26,11 @@
         </div>
         <div class="form-group">
             @if($formValues->type == "create")
-                <button class="btn btn-gradient">Add to Library</button>
-                <button class="btn btn-gradient">Add and Schedule</button>
+                <button class="btn btn-gradient" formaction="{{$formValues->form_route}}" value>Add to Library</button>
+                <button class="btn btn-gradient" formaction="{{$formValues->form_route}}?schedule=true" name="submit_type" value="add-schedule">Add and Schedule</button>
             @else
-                <button class="btn btn-gradient">Update</button>
-                <button class="btn btn-gradient">Update and Schedule</button>
+                <button class="btn btn-gradient" formaction="{{$formValues->form_route}}">Update</button>
+                <button class="btn btn-gradient" formaction="{{$formValues->form_route}}?schedule=true">Update and Schedule</button>
             @endif
         </div>
         

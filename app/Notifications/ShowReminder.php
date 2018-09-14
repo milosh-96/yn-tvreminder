@@ -16,9 +16,10 @@ class ShowReminder extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($show,$reminder)
     {
-        //
+        $this->show = $show;
+        $this->reminder = $reminder;
     }
 
     /**
@@ -41,8 +42,9 @@ class ShowReminder extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
+                    ->subject('Reminder: '. $this->show->title)
+                    ->line($this->show->title)
+                    ->action("Starts at ". $this->reminder->formattedTime() . " on " . $this->reminder->tv, url(route('index')))
                     ->line('Thank you for using our application!');
     }
 

@@ -7,6 +7,7 @@ use App\Http\Traits\HomeSwitchTrait;
 
 
 use App\Reminder;
+use App\User;
 use App\Notifications\ShowReminder;
 
 class HomeController extends Controller
@@ -29,10 +30,13 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Reminder $rem)
+    public function index(Reminder $rem,User $user)
     {
-        $rem->find(1)->first();
-        $rem->notify(new ShowReminder);
+        $rem = $rem->first();
+
+        $show = $rem->getShow;
+        $user = $rem->getUser;
+        $user->notify(new ShowReminder($show,$rem));
 
        return $this->switcher();
     }
