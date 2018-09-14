@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Reminder extends Model
 {
+    use Notifiable;
+
     protected $fillable = ["monday","tuesday","wednesday","thursday","friday","saturday","sunday","tv","weekly","user_id","show_id","start_time","end_time"];
 
 
@@ -25,6 +28,8 @@ class Reminder extends Model
         $output .= "@ " . date("H:i",strtotime($this->start_time)) . " on " . $this->tv;
         return $output;
     }
+
+
 
 }
 

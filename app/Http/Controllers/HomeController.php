@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Traits\HomeSwitchTrait;
 
+
+use App\Reminder;
+use App\Notifications\ShowReminder;
+
 class HomeController extends Controller
 {
 
@@ -25,8 +29,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Reminder $rem)
     {
+        $rem->find(1)->first();
+        $rem->notify(new ShowReminder);
+
        return $this->switcher();
     }
 }
