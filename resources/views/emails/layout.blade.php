@@ -13,7 +13,7 @@
         <td class="container">
           <div class="content">
             <div class="align-center">
-                <img src="{{asset('images/logo.png')}}" width="100px">
+                <img src="https://raw.githubusercontent.com/milosh-96/yn-tvreminder/master/public/images/logo.png" width="100px">
             </div>
             <!-- START CENTERED WHITE CONTAINER -->
             <span class="preheader">@yield('preheader')</span>

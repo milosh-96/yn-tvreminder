@@ -36,7 +36,8 @@ class HomeController extends Controller
 
         $show = $rem->getShow;
         $user = $rem->getUser;
-        $user->notify(new ShowReminder($show,$rem));
+        
+       // $user->notify(new ShowReminder($show,$rem));
 
 
        return $this->switcher();
