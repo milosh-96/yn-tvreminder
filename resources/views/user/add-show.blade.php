@@ -5,11 +5,17 @@
     <form method="POST">
         @csrf
         <input type="hidden" name="_method" value="{{$formValues->form_method}}">
+		<div class="form-check">
+			<input type="checkbox" value="1" id="public" name="public">
+			<label for="public">Public?</label>
+			<span class="hint">Is the show public?</span>
+		</div>
         <div class="form-group">
             <label for="title"><i class="fa fa-font"></i>Title</label>
             <span class="hint">You can type anything that will help you to remember this show</span>
             <input id="title" name="title" type="text" class="form-control form-control-lg" value="{{$formValues->type == 'update' ? $show->title : old('title')}}"> 
         </div>
+		
         <div class="form-group">
             <label for="description"><i class="fa fa-comment"></i> Description</label>
             <span class="hint">How would you describe this show? Be descriptive, or ignore this field :)</span>
@@ -19,11 +25,13 @@
             <label for="cover_url"><i class="fa fa-image"></i> Cover</label>
             <span class="hint">Enter a URL of cover picture</span>
             <input id="cover_url" name="cover_url" type="text" autocomplete="off" class="form-control form-control-sm" value="{{$formValues->type == 'update' ? $show->cover_url : old('cover_url')}}"> 
-
+			
             <div id="image_preview" class="mt-4">
                 <img id="image" width="250px" />
             </div>
         </div>
+		
+		
         <div class="form-group">
             @if($formValues->type == "create")
                 <button class="btn btn-gradient" formaction="{{$formValues->form_route}}" value>Add to Library</button>

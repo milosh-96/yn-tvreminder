@@ -22,7 +22,7 @@
                         <th>TV</th>
                         <th>Monday</th>
                         <th>Tuesday</th>
-                        <th>wednesday</th>
+                        <th>Wednesday</th>
                         <th>Thursday</th>
                         <th>Friday</th>
                         <th>Saturday</th>
@@ -33,7 +33,7 @@
                     @foreach($show->reminders as $reminder)
                     <tr class="text-center">
                         <td>{{$reminder->tv}}</td>
-                        <td>{{$reminder->tonday ? $reminder->formattedTime() : '--:--'}}</td>
+                        <td>{{$reminder->monday ? $reminder->formattedTime() : '--:--'}}</td>
                         <td>{{$reminder->tuesday ? $reminder->formattedTime() : '--:--'}}</td>
                         <td>{{$reminder->wednesday ? $reminder->formattedTime() : '--:--'}}</td>
                         <td>{{$reminder->thursday ? $reminder->formattedTime() : '--:--'}}</td>

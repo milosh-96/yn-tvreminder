@@ -76,16 +76,17 @@ class ShowController extends Controller
     private function storeShowInDatabase($request,$type = "create",$show = null) {
         $slug = str_slug($request->title);
         $hash = substr(Str::uuid($request->title . '-' . auth()->user()->id . '-' . date("Y-m-d H:i")),0,7);
-        $obj = array_merge($request->except(['_token','_method']),["user_id"=>auth()->user()->id,"hash"=>$hash,"slug"=>$slug]);
+        $obj = array_merge($request->except(['_token','_method']),["user_id"=>auth()->user()->id,"hash"=>$hash,"slug"=>$slug,"public"=>$request->public == 1 ? 1 : 0]);
         
         $validatedData = $request->validate([
             'title' => 'required|max:255',
-            'description' => 'required',
+            'description' => 'required'
             ]);
             if($type == "update") {
                 $show->title = $request->title;
                 $show->description = $request->description;
                 $show->cover_url = $request->cover_url;
+				$show->public = $request->public == 1 ? 1 : 0;
                 $show->save();
                 return $show;
             }

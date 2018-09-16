@@ -23,7 +23,7 @@ class CreateShowsTable extends Migration
             $table->string('slug')->unique();
             $table->text('description')->nullable();
             $table->string('cover_url')->nullable();
-            $table->bool('public')->default(0);
+            $table->boolean('public')->default(0);
         });
     }
 
