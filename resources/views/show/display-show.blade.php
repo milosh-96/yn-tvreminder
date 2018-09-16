@@ -16,31 +16,33 @@
     <div class="row my-5">
         <div class="col-12">
             <h3>Reminders</h3>
-            <table class="table">
+            <table class="table table-striped table-hover">
                 <thead>
-                    <th>#</th>
-                    <th>Monday</th>
-                    <th>Tuesday</th>
-                    <th>wednesday</th>
-                    <th>Thursday</th>
-                    <th>Friday</th>
-                    <th>Saturday</th>
-                    <th>Sunday</th>
+                    <tr class="text-center">
+                        <th>TV</th>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>wednesday</th>
+                        <th>Thursday</th>
+                        <th>Friday</th>
+                        <th>Saturday</th>
+                        <th>Sunday</th>
+                    </tr>
                 </thead>
                 <tbody>
                     @foreach($show->reminders as $reminder)
-                   <tr>
-                    <td>{{$reminder->id}}</td>
-                    <td>{{$reminder->tonday ? $reminder->formattedTime() : '--:--'}}</td>
-                    <td>{{$reminder->tuesday ? $reminder->formattedTime() : '--:--'}}</td>
-                    <td>{{$reminder->wednesday ? $reminder->formattedTime() : '--:--'}}</td>
-                    <td>{{$reminder->thursday ? $reminder->formattedTime() : '--:--'}}</td>
-                    <td>{{$reminder->friday ? $reminder->formattedTime() : '--:--'}}</td>
-                    <td>{{$reminder->saturday ? $reminder->formattedTime() : '--:--'}}</td>
-                    <td>{{$reminder->sunday ? $reminder->formattedTime() : '--:--'}}</td>
-                   </tr>
-                   @endforeach
-                 
+                    <tr class="text-center">
+                        <td>{{$reminder->tv}}</td>
+                        <td>{{$reminder->tonday ? $reminder->formattedTime() : '--:--'}}</td>
+                        <td>{{$reminder->tuesday ? $reminder->formattedTime() : '--:--'}}</td>
+                        <td>{{$reminder->wednesday ? $reminder->formattedTime() : '--:--'}}</td>
+                        <td>{{$reminder->thursday ? $reminder->formattedTime() : '--:--'}}</td>
+                        <td>{{$reminder->friday ? $reminder->formattedTime() : '--:--'}}</td>
+                        <td>{{$reminder->saturday ? $reminder->formattedTime() : '--:--'}}</td>
+                        <td>{{$reminder->sunday ? $reminder->formattedTime() : '--:--'}}</td>
+                    </tr>
+                    @endforeach
+                    
                 </tbody>
             </table>
         </div>
