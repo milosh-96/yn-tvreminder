@@ -3,7 +3,7 @@
         <img src="{{$show->cover_url ? $show->cover_url : 'https://placeimg.com/640/480/any'}}" alt="" class="card img-top w-100">
     </div>
     <div class="card-body">
-        <h5 class="card-title">{{$show->title}}</h5>
+        <a href="{{route('show.view',$show->hash)}}"><h5 class="card-title">{{$show->title}}</h5></a>
         <p>{{$show->description}}</p>
 
         <div class="row">

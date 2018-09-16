@@ -1,4 +1,4 @@
-@section('user_title',$formValues->show->title)
+@section('bar_title',$formValues->show->title)
 <div class="col-12 mb-2">
 <form action="{{route('reminder.store',$formValues->show->hash)}}" method="POST">
 @csrf

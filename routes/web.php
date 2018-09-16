@@ -30,9 +30,11 @@ Route::prefix('user')->group(function() {
 });
 
 Route::prefix('show')->group(function() {
+
     Route::get('add-new','ShowController@create')->name('show.add');
     Route::post('/','ShowController@store')->name('show.store');
     Route::get('edit/{hash}','ShowController@edit')->name('show.edit');
+    Route::get('view/{hash}','ShowController@show')->name('show.view');
     Route::prefix('{hash}')->group(function() {
         Route::put('/','ShowController@update')->name('show.update');
         Route::get('/set-reminder','ReminderController@create')->name('reminder.create');

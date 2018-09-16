@@ -21,7 +21,13 @@ class Reminder extends Model
     public function formattedTime() {
         return date("H:i",strtotime($this->start_time));
     }
+    public function getTodayReminders() {
+        $day = strtolower(date("l"));
 
+        //$current = date("H:i",strtotime("+15 minutes"));
+        $current = date("H:i",strtotime("02:35"));
+        return $this->whereTime('start_time','=',$current)->get();
+    }
     
     public function display() {
         

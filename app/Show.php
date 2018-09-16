@@ -11,7 +11,12 @@ class Show extends Model
     public function findByHash($hash) {
         return Show::where('hash','=',$hash)->first();
     }
-   
+    public function isPublic() {
+        if($this->public == 1) {
+            return true;
+        }
+        return false;
+    }
     public function hasReminders() {
         if(count($this->reminders) > 0) {
             return true;

@@ -17,7 +17,7 @@ class ShowController extends Controller
     
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('show');
     }
     
     public function index()
@@ -108,9 +108,16 @@ class ShowController extends Controller
         * @param  \App\Show  $show
         * @return \Illuminate\Http\Response
         */
-        public function show(Show $show)
+        public function show(Show $show,$hash)
         {
-            //
+           $show = $show->findByHash($hash);
+           //return $show;
+            if($show->isPublic() OR $show->user_id == auth()->user()->id ) {
+                return view('show.display-show')->with(['show'=>$show]);
+            }
+            else {
+                return redirect()->route('index');
+            }
         }
         
         /**
