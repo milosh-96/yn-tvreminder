@@ -13,17 +13,30 @@
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
 </head>
 <body id="@yield('body_id','main')">
-@if((request()->route()->getName() != 'login' && request()->route()->getName() != 'register'))
-@include('layouts.shared.header-bar')
-@if(auth()->check())
-@include('layouts.user')
-@else
-@include('layouts.public')
-@endif
-@else 
-@include('layouts.login-register-layout')
-@endif
-
+    
+    @if((request()->route()->getName() != 'login' && request()->route()->getName() != 'register'))
+    @include('layouts.shared.header-bar')
+    @if(session()->has('msg'))
+    <div class="container">
+        <div class="col-12">
+           <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {!!session()->get('msg')!!}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    @endif
+    @if(auth()->check())
+    @include('layouts.user')
+    @else
+    @include('layouts.public')
+    @endif
+    @else 
+    @include('layouts.login-register-layout')
+    @endif
+    
     <footer>
         <small>{{date("Y")}} - TVReminder. All rights are reserved.</small>
     </footer>

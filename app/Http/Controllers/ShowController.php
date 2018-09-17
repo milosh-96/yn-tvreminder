@@ -162,8 +162,11 @@ class ShowController extends Controller
         * @param  \App\Show  $show
         * @return \Illuminate\Http\Response
         */
-        public function destroy(Show $show)
+        public function destroy(Show $show,$hash)
         {
-            //
+            $show = $show->findByHash($hash);
+            $show->delete();
+            session()->flash('msg','<strong>'.$show->title . '</strong> and associated reminders have been deleted!');
+            return redirect()->back();
         }
     }

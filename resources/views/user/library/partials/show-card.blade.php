@@ -9,7 +9,14 @@
         <div class="row">
            <div class="col-6">
             <small><a href="{{route('show.edit',$show->hash)}}">Edit</a></small>
-                <small>Delete</small>
+                <small>
+                    <form action="{{route('show.delete',$show->hash)}}" method="POST" class="d-inline">
+                        @csrf
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button class="link" onclick="tvReminder.globalActions.confirmDelete(event)">Delete</button>
+                    </form>
+
+                </small>
             </div>
             <div class="col-6 text-right">
                 @if($show->hasReminders())

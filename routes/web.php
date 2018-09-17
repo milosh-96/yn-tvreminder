@@ -37,6 +37,7 @@ Route::prefix('show')->group(function() {
     Route::get('view/{hash}','ShowController@show')->name('show.view');
     Route::prefix('{hash}')->group(function() {
         Route::put('/','ShowController@update')->name('show.update');
+        Route::delete('/','ShowController@destroy')->name('show.delete');
         Route::get('/set-reminder','ReminderController@create')->name('reminder.create');
         Route::post('/set-reminder','ReminderController@store')->name('reminder.store');
         Route::get('list-reminders','ReminderController@list')->name('reminder.list');
