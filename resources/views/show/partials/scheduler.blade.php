@@ -42,6 +42,7 @@
                     </div>
                     <div id="days-picker" class="days-picker" style="min-height: 100px">
                         <select name="days[]" multiple id="days" size="7" class="form-control">
+                            <!--ADD SELECTED FIELDS BASED ON DB RECORD WHEN EDIT MODE IS ACTIVE-->
                             @foreach($formValues->weekly_days as $w_day)
                             <option value="{{strtolower($formValues->day_names[$w_day-1])}}" @if($formValues->current_day_in_week == $w_day) selected @endif>{{$formValues->day_names[$w_day-1]}}</option>
                             @endforeach
