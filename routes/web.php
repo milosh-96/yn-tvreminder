@@ -38,11 +38,19 @@ Route::prefix('show')->group(function() {
     Route::prefix('{hash}')->group(function() {
         Route::put('/','ShowController@update')->name('show.update');
         Route::delete('/','ShowController@destroy')->name('show.delete');
+        
+        Route::get('list-reminders','ReminderController@list')->name('reminder.list');
+        
+    });
+});
+
+Route::prefix('reminder')->group(function() {
+    Route::prefix('show/{showHash}')->group(function() {
         Route::get('/set-reminder','ReminderController@create')->name('reminder.create');
         Route::post('/set-reminder','ReminderController@store')->name('reminder.store');
-        Route::get('list-reminders','ReminderController@list')->name('reminder.list');
-        Route::get('edit-reminder/{id}','ReminderController@edit')->name('reminder.edit');
 
+        Route::get('edit-reminder/{reminderHash}','ReminderController@edit')->name('reminder.edit');
+        Route::put('/edit-reminder/{reminderHash}','ReminderController@store')->name('reminder.update');
     });
 });
 Auth::routes();

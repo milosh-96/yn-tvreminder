@@ -1,7 +1,8 @@
 @section('bar_title',$formValues->show->title)
 <div class="col-12 mb-2">
-<form action="{{route('reminder.store',$formValues->show->hash)}}" method="POST">
+<form action="{{$formValues->form_route}}" method="POST">
 @csrf
+<input type="hidden" name="_method" value="{{$formValues->form_method}}">
                     <div class="tyle-selector py-2">
                         <label>One-Time</label>
                         <input type="radio" name="repeat_type" value="onetime" onclick="activateOneTime()">
@@ -43,8 +44,8 @@
                     <div id="days-picker" class="days-picker" style="min-height: 100px">
                         <select name="days[]" multiple id="days" size="7" class="form-control">
                             <!--ADD SELECTED FIELDS BASED ON DB RECORD WHEN EDIT MODE IS ACTIVE-->
-                            @foreach($formValues->weekly_days as $w_day)
-                            <option value="{{strtolower($formValues->day_names[$w_day-1])}}" @if($formValues->current_day_in_week == $w_day) selected @endif>{{$formValues->day_names[$w_day-1]}}</option>
+                            @foreach($formValues->weekly_days as $key => $value)
+                            <option value="{{strtolower($formValues->day_names[$key-1])}}" @if($value == true)selected="selected" @endif>{{$formValues->day_names[$key-1]}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -72,7 +73,7 @@
                             @endforeach
                         </select>
                         <span class="d-inline px-2">on</span>
-                        <input type="text" class="w-25 form-control d-inline" name="tv_channel" placeholder="TV channel">
+                        <input type="text" class="w-25 form-control d-inline" name="tv_channel" placeholder="TV channel" value="{{$formValues->tv}}">
                     </div>
                     <hr>
                     <div class="form-check">

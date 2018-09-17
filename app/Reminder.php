@@ -9,7 +9,11 @@ class Reminder extends Model
 {
     use Notifiable;
 
-    protected $fillable = ["monday","tuesday","wednesday","thursday","friday","saturday","sunday","tv","weekly","user_id","show_id","start_time","end_time"];
+    protected $fillable = ["hash","monday","tuesday","wednesday","thursday","friday","saturday","sunday","tv","weekly","user_id","show_id","start_time","end_time"];
+
+    public function findByHash($hash) {
+        return Reminder::where('hash','=',$hash)->with('getShow')->first();
+    }
 
     public function getShow() {
         return $this->hasOne('App\Show','id','show_id');

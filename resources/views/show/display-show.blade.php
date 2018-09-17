@@ -19,6 +19,7 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr class="text-center">
+                        <th></th>
                         <th>TV</th>
                         <th>Monday</th>
                         <th>Tuesday</th>
@@ -32,6 +33,7 @@
                 <tbody>
                     @foreach($show->reminders as $reminder)
                     <tr class="text-center">
+                        <td><a href="{{route('reminder.edit',[$show->hash,$reminder->hash])}}"><i class="fa fa-edit"></i></a></td>
                         <td>{{$reminder->tv}}</td>
                         <td>{{$reminder->monday ? $reminder->formattedTime() : '--:--'}}</td>
                         <td>{{$reminder->tuesday ? $reminder->formattedTime() : '--:--'}}</td>
