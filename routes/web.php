@@ -41,6 +41,7 @@ Route::prefix('show')->group(function() {
         Route::get('/set-reminder','ReminderController@create')->name('reminder.create');
         Route::post('/set-reminder','ReminderController@store')->name('reminder.store');
         Route::get('list-reminders','ReminderController@list')->name('reminder.list');
+        Route::get('edit-reminder/{id}','ReminderController@edit')->name('reminder.edit');
 
     });
 });

@@ -10,7 +10,7 @@
             <div class="modal-body text-left">
                 <ul class="list-group">
                     @foreach($show->reminders as $reminder)
-                    <li class="list-group-item">{{$reminder->display()}}</li>
+                    <li class="list-group-item">{{$reminder->display()}} <a href="{{route('reminder.edit',[$show->hash,$reminder->id])}}">(edit)</a></li>
                     @endforeach
                 </ul>
             </div>

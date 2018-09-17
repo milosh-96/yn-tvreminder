@@ -25,27 +25,7 @@ class ReminderController extends Controller
     public function create(Show $show,$hash)
     {
         $show = $show->findByHash($hash);
-        $formValues = array(
-            'show'=>$show,
-            'type'=>"create",
-            'form_route'=>route("show.store"),
-            'form_method'=>"POST",
-            'days' => $this->formValueGenerator(32,1,true),
-            'months'=>$this->formValueGenerator(13,1,true),
-            'years'=>$this->formValueGenerator(date("Y")+6,date("Y")),
-            'hours'=>$this->formValueGenerator(24,0,true),
-            'minutes'=>$this->formValueGenerator(60,0,true),
-            'current_date'=>(object) array(
-                'year'=>date("Y"),
-                'month'=>date("m"),
-                'day'=>date("d"),
-                'hour'=>date("H"),
-                'minute'=>date("i")
-            ),
-            'day_names'=>array("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"),
-            'weekly_days'=>array(1,2,3,4,5,6,7),
-            'current_day_in_week'=>date("N")
-        );
+        $formValues = $this->formValues($show);
         return view('show.schedule')->with(['formValues'=>(object) $formValues]);
     }
 
@@ -89,9 +69,13 @@ class ReminderController extends Controller
      * @param  \App\Reminder  $reminder
      * @return \Illuminate\Http\Response
      */
-    public function edit(Reminder $reminder)
+    public function edit(Show $show,Reminder $reminder,$hash,$id)
     {
-        //
+        $show = $show->findByHash($hash);
+        $formValues = $this->formValues($show);
+        $formValues['type'] = "edit";
+        $formValues['reminder'] = $reminder->find($id)->first();
+        return view('show.schedule')->with(['formValues'=>(object) $formValues]);
     }
 
     /**
@@ -125,5 +109,29 @@ class ReminderController extends Controller
             $temp_array[] = $i;
         }
         return $temp_array;
+    }
+
+    private function formValues($show) {
+        return array(
+            'show'=>$show,
+            'type'=>"create",
+            'form_route'=>route("show.store"),
+            'form_method'=>"POST",
+            'days' => $this->formValueGenerator(32,1,true),
+            'months'=>$this->formValueGenerator(13,1,true),
+            'years'=>$this->formValueGenerator(date("Y")+6,date("Y")),
+            'hours'=>$this->formValueGenerator(24,0,true),
+            'minutes'=>$this->formValueGenerator(60,0,true),
+            'current_date'=>(object) array(
+                'year'=>date("Y"),
+                'month'=>date("m"),
+                'day'=>date("d"),
+                'hour'=>date("H"),
+                'minute'=>date("i")
+            ),
+            'day_names'=>array("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"),
+            'weekly_days'=>array(1,2,3,4,5,6,7),
+            'current_day_in_week'=>date("N")
+        );
     }
 }
