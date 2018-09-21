@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Show;
+use App\Reminder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
+use Carbon\Carbon;
+use App\Mail\ReminderMail;
+use App\Jobs\ReminderMailJob;
 class ShowController extends Controller
 {
     /**
@@ -112,9 +116,13 @@ class ShowController extends Controller
         public function show(Show $show,$hash)
         {
            $show = $show->findByHash($hash);
+
            //return $show;
             if($show->isPublic() OR $show->user_id == auth()->user()->id ) {
+                $job = (new ReminderMailJob())->delay(Carbon::now()->addSeconds(10));
+                dispatch($job);
                 return view('show.display-show')->with(['show'=>$show]);
+
             }
             else {
                 return redirect()->route('index');

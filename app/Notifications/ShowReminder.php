@@ -20,6 +20,7 @@ class ShowReminder extends Notification
     {
         $this->show = $show;
         $this->reminder = $reminder;
+        return $show;
     }
 
     /**

@@ -10,6 +10,7 @@ use App\Reminder;
 use App\User;
 use App\Notifications\ShowReminder;
 
+
 class HomeController extends Controller
 {
 
@@ -32,9 +33,8 @@ class HomeController extends Controller
      */
     public function index(Reminder $rem,User $user)
     {
-        
        // $user->notify(new ShowReminder($show,$rem));
-
+     
 
        return $this->switcher();
     }
