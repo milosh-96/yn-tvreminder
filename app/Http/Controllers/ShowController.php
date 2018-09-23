@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 use Carbon\Carbon;
-use App\Mail\ReminderMail;
-use App\Jobs\ReminderMailJob;
 class ShowController extends Controller
 {
     /**
@@ -119,12 +117,7 @@ class ShowController extends Controller
 
            //return $show;
             if($show->isPublic() OR $show->user_id == auth()->user()->id ) {
-                $reminders = Reminder::with('getShow')->get();
-
-                foreach($reminders as $reminder) {
-                    $job = (new ReminderMailJob($reminder))->delay(Carbon::parse(date("Y-m-d") . " " . $reminder->start_time)->subMinutes(15));//
-                    dispatch($job);
-                }
+               
                 return view('show.display-show')->with(['show'=>$show]);
 
             }

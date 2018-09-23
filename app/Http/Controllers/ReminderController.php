@@ -8,6 +8,11 @@ use Illuminate\Support\Str;
 
 use App\Show;
 
+use App\Jobs\ReminderMailJob;
+use App\Mail\ReminderMail;
+use Carbon\Carbon;
+
+
 class ReminderController extends Controller
 {
     /**
@@ -65,12 +70,15 @@ class ReminderController extends Controller
         }   
         switch($request->_method) {
             case "POST":
-                Reminder::create($object);
+                $reminder = Reminder::create($object);
+                $reminder = Reminder::where("id",$reminder->id)->with('getShow')->first();
                 break;
             case "PUT":
-                Reminder::where('hash',$reminderHash)->update($object);
+                $reminder = Reminder::where('hash',$reminderHash)->update($object);
                 break;
         }
+        $job = (new ReminderMailJob($reminder))->delay(Carbon::parse(date("Y-m-d") . " " . $reminder->start_time)->subMinutes(15));//
+        dispatch($job);
         return redirect()->route('index');
     }
 
