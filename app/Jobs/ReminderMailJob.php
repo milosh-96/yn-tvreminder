@@ -22,9 +22,11 @@ class ReminderMailJob implements ShouldQueue
     *
     * @return void
     */
-    public function __construct()
+    protected $reminder;
+
+    public function __construct($reminder)
     {
-        //
+        $this->reminder = $reminder;
     }
     
     /**
@@ -34,9 +36,9 @@ class ReminderMailJob implements ShouldQueue
     */
     public function handle()
     {
-        $show = Show::find(1)->first();
-        $rem = Reminder::find(2)->first();
+        $reminder = $this->reminder;
+
         
-        Mail::to("ddd@ddd.com")->send(new ReminderMail);    
+        Mail::to("ddd@ddd.com")->send(new ReminderMail($reminder));    
     }
 }

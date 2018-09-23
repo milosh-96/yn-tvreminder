@@ -119,8 +119,12 @@ class ShowController extends Controller
 
            //return $show;
             if($show->isPublic() OR $show->user_id == auth()->user()->id ) {
-                $job = (new ReminderMailJob())->delay(Carbon::now()->addSeconds(10));
-                dispatch($job);
+                $reminders = Reminder::with('getShow')->get();
+
+                foreach($reminders as $reminder) {
+                    $job = (new ReminderMailJob($reminder))->delay(Carbon::parse(date("Y-m-d") . " " . $reminder->start_time)->addDays(1)->subMinutes(15));
+                    dispatch($job);
+                }
                 return view('show.display-show')->with(['show'=>$show]);
 
             }

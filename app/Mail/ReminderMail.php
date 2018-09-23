@@ -19,9 +19,12 @@ class ReminderMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+
+    protected $reminder;
+
+    public function __construct($reminder)
     {
-        //
+        $this->reminder = $reminder;
     }
 
     /**
@@ -31,8 +34,7 @@ class ReminderMail extends Mailable
      */
     public function build()
     {
-        $show = Show::find(1)->first();
-        $reminder = Reminder::find(2)->first();
+        $reminder = $this->reminder;
 
         return $this->view('emails.show-reminder',compact('show','reminder'));
     }

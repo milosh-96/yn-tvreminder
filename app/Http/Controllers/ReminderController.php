@@ -29,6 +29,7 @@ class ReminderController extends Controller
         $show = $show->findByHash($hash);
         $formValues = $this->formValues($show);
         $formValues["weekly_days"][date("w")] = true;
+        
         return view('show.schedule')->with(['formValues'=>(object) $formValues]);
     }
 
