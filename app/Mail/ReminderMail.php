@@ -36,6 +36,6 @@ class ReminderMail extends Mailable
     {
         $reminder = $this->reminder;
 
-        return $this->view('emails.show-reminder',compact('show','reminder'));
+        return $this->view('emails.show-reminder',compact('reminder'));
     }
 }

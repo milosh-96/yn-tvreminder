@@ -26,12 +26,12 @@
                     <tr>
                       <td>
                         <p>Hi there,</p>
-                        <h2>{{$show->title}} is about to begin!</h2>
+                        <h2>{{$reminder->getShow->title}} is about to begin!</h2>
                         <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                           <tbody>
                             <tr style="max-height:300px">
                                 <td>
-                                    <img src="{{$show->cover_url}}" width="100%" alt="">
+                                    <img src="{{$reminder->getShow->cover_url}}" width="100%" alt="">
                                 </td>
                             </tr>
                             <tr>
