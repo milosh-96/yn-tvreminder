@@ -39,6 +39,6 @@ class ReminderMailJob implements ShouldQueue
         $reminder = $this->reminder;
 
         
-        Mail::to("ddd@ddd.com")->send(new ReminderMail($this->reminder));    
+        Mail::to($reminder->getUser->email)->send(new ReminderMail($this->reminder));    
     }
 }

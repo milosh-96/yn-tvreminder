@@ -71,11 +71,10 @@ class ReminderController extends Controller
         switch($request->_method) {
             case "POST":
                 $reminder = Reminder::create($object);
-                $reminder = Reminder::where("id",$reminder->id)->with('getShow')->first();
+                $reminder = Reminder::where("id",$reminder->id)->with(['getShow','getUser'])->first();
                 break;
             case "PUT":
-                $reminder = Reminder::where('hash',$reminderHash)->with('getShow')->update($object);
-                
+                $reminder = Reminder::where('hash',$reminderHash)->with(['getShow','getUser'])->update($object);
                 break;
         }
         $job = (new ReminderMailJob($reminder))->delay(Carbon::parse(date("Y-m-d") . " " . $reminder->start_time)->subMinutes(15));//
