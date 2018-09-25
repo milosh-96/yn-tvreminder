@@ -2,33 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\Reminder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Artisan;
+
 
 use App\Show;
+use App\Reminder;
 
 use App\Jobs\ReminderMailJob;
+
 use App\Mail\ReminderMail;
+
 use Carbon\Carbon;
+
 
 
 class ReminderController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Display a listing of the resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function index()
     {
     }
-
+    
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Show the form for creating a new resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function create(Show $show,$hash)
     {
         $show = $show->findByHash($hash);
@@ -37,68 +43,73 @@ class ReminderController extends Controller
         
         return view('show.schedule')->with(['formValues'=>(object) $formValues]);
     }
-
+    
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    * Store a newly created resource in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
     public function store(Show $show,Request $request,$showHash,$reminderHash = null)
     {
         $show = $show->findByHash($showHash);
-
+        
         $hash = substr(Str::uuid($show->title . '-' . auth()->user()->id . '-' . date("Y-m-d H:i")),0,7);
-
+        
         $object = null;
-      
+        
         $fields = array("tv"=>$request->tv_channel,"start_time"=>$request->hour . ':' . $request->minute);
-
+        
         if($request->_method == "POST") {
             $fields["hash"] = $hash;
             $fields["show_id"] = $show->id;
             $fields["user_id"] = $show->user_id;
         }
-
+        
         if($request->repeat_type == "weekly") {
             $days = array("monday"=>false,"tuesday"=>false,"wednesday"=>false,"thursday"=>false,"friday"=>false,"saturday"=>false,"sunday"=>false);
-
+            
             foreach($request->days as $day) {
                 $days[$day] = true;
             }
             $object = array_merge($fields,$days);
         }   
+        $reminder = null;
         switch($request->_method) {
             case "POST":
-                $reminder = Reminder::create($object);
-                $reminder = Reminder::where("id",$reminder->id)->with(['getShow','getUser'])->first();
-                break;
+            $reminder = Reminder::create($object);
+            break;
             case "PUT":
-                $reminder = Reminder::where('hash',$reminderHash)->with(['getShow','getUser'])->update($object);
-                break;
+            
+            $reminder = Reminder::where('hash',$reminderHash)->with(['getShow','getUser'])->update($object);
+            $reminder = Reminder::where('hash',$reminderHash)->with(['getShow','getUser'])->first();
+            break;
         }
-        $job = (new ReminderMailJob($reminder))->delay(Carbon::parse(date("Y-m-d") . " " . $reminder->start_time)->subMinutes(15));//
+        
+        
+        // $job = (new ReminderMailJob($reminder))->delay(Carbon::parse(date("Y-m-d") . " " . $reminder->start_time)->subMinutes(15));//
+        $job = (new ReminderMailJob($reminder));
         dispatch($job);
         return redirect()->route('index');
     }
-
+    
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Reminder  $reminder
-     * @return \Illuminate\Http\Response
-     */
+    * Display the specified resource.
+    *
+    * @param  \App\Reminder  $reminder
+    * @return \Illuminate\Http\Response
+    */
     public function show(Reminder $reminder)
     {
         //
     }
-
+    
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Reminder  $reminder
-     * @return \Illuminate\Http\Response
-     */
+    * Show the form for editing the specified resource.
+    *
+    * @param  \App\Reminder  $reminder
+    * @return \Illuminate\Http\Response
+    */
     public function edit(Show $show,Reminder $reminder,$showHash,$reminderHash)
     {
         $show = $show->findByHash($showHash);
@@ -114,31 +125,31 @@ class ReminderController extends Controller
         $formValues["weekly_days"]["5"] = $formValues["reminder"]->friday ? true : false;
         $formValues["weekly_days"]["6"] = $formValues["reminder"]->saturday ? true : false;
         $formValues["weekly_days"]["7"] = $formValues["reminder"]->sunday ? true : false;
-
+        
         $formValues["current_date"]->hour = date("H",strtotime($formValues["reminder"]->start_time));
         $formValues["current_date"]->minute = date("i",strtotime($formValues["reminder"]->start_time));
         $formValues["tv"] = $formValues["reminder"]->tv;
         return view('show.schedule')->with(['formValues'=>(object) $formValues]);
     }
-
+    
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Reminder  $reminder
-     * @return \Illuminate\Http\Response
-     */
+    * Update the specified resource in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @param  \App\Reminder  $reminder
+    * @return \Illuminate\Http\Response
+    */
     public function update(Request $request, Reminder $reminder)
     {
         //
     }
-
+    
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Reminder  $reminder
-     * @return \Illuminate\Http\Response
-     */
+    * Remove the specified resource from storage.
+    *
+    * @param  \App\Reminder  $reminder
+    * @return \Illuminate\Http\Response
+    */
     public function destroy(Reminder $reminder)
     {
         //
@@ -153,7 +164,7 @@ class ReminderController extends Controller
         }
         return $temp_array;
     }
-
+    
     private function formValues($show) {
         return array(
             "show"=>$show,
@@ -176,7 +187,7 @@ class ReminderController extends Controller
             "weekly_days"=>array("1"=>false,"2"=>false,"3"=>false,"4"=>false,"5"=>false,"6"=>false,"7"=>false),
             "current_day_in_week"=>date("N"),
             "tv"=>null
-
+            
         );
     }
 }

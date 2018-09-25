@@ -7,6 +7,7 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 use \App\Reminder;
 use \App\Show;
+use \App\Jobs\ReminderMailJob;
 
 class Kernel extends ConsoleKernel
 {
@@ -28,19 +29,6 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         
-        
-        $schedule->call(function() {
-
-            $day = strtolower(date("l"));
-            $rems = \App\Reminder::where($day,'=',1)->get();
-            
-            foreach($rems as $rem) {
-                $show = $rem->getShow;
-                $user = $rem->getUser;
-                $user->notify(new \App\Notifications\ShowReminder($show,$rem));
-            }
-        }
-        )->everyMinute();
         
         $schedule->command('inspire')->everyMinute();
         

@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Database\DB;
 
 use App\Reminder;
 use App\Show;
@@ -48,7 +49,8 @@ class SendReminderMail extends Command
     public function handle()
     {
         $reminder = Reminder::where('id',$this->argument('reminder'))->with(['getShow','getUser'])->first();
-        $job = (new ReminderMailJob($reminder))->delay(Carbon::parse(date("Y-m-d") . " " . $reminder->start_time)->subMinutes(15));//
+        // $job = (new ReminderMailJob($reminder))->delay(Carbon::parse(date("Y-m-d") . " " . $reminder->start_time)->subMinutes(15));//
+         $job = (new ReminderMailJob($reminder));
         dispatch($job);
         print "Reminder with ID of " . $this->argument('reminder') . " and hash " . $reminder->hash . " has been sent successfully. This reminder is associated with the show <<" . $reminder->getShow->title . ">> and that show belongs to user with the ID of " . $reminder->getUser->id . " and his/her user name is " . $reminder->getUser->user_name . "." ;
     }

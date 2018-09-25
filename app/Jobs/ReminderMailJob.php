@@ -34,11 +34,10 @@ class ReminderMailJob implements ShouldQueue
     *
     * @return void
     */
-    public function handle()
+    public function handle($job)
     {
         $reminder = $this->reminder;
-
-        
-        Mail::to($reminder->getUser->email)->send(new ReminderMail($this->reminder));    
+        $job->delete();
+        //Mail::to($reminder->getUser->email)->send(new ReminderMail($this->reminder));    
     }
 }
