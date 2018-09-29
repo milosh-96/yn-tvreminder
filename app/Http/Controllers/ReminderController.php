@@ -88,8 +88,8 @@ class ReminderController extends Controller
         
         
         // $job = (new ReminderMailJob($reminder))->delay(Carbon::parse(date("Y-m-d") . " " . $reminder->start_time)->subMinutes(15));//
-        $job = (new ReminderMailJob($reminder));
-        dispatch($job);
+        //$job = (new ReminderMailJob($reminder));
+        //dispatch($job);
         return redirect()->route('index');
     }
     
