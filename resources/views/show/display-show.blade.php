@@ -33,7 +33,17 @@
                 <tbody>
                     @foreach($show->reminders as $reminder)
                     <tr class="text-center">
-                        <td><a href="{{route('reminder.edit',[$show->hash,$reminder->hash])}}"><i class="fa fa-edit"></i></a></td>
+                        <td>
+                            <a href="{{route('reminder.edit',[$show->hash,$reminder->hash])}}">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                                <form class="d-inline" action="{{route('reminder.delete',[$show->hash,$reminder->hash])}}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit" class="link"><i class="fa fa-trash"></i></button>
+                                </form>
+                            </a>
+                        </td>
                         <td>{{$reminder->tv}}</td>
                         <td>{{$reminder->monday ? $reminder->formattedTime() : '--:--'}}</td>
                         <td>{{$reminder->tuesday ? $reminder->formattedTime() : '--:--'}}</td>

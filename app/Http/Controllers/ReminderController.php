@@ -146,10 +146,19 @@ class ReminderController extends Controller
     * @param  \App\Reminder  $reminder
     * @return \Illuminate\Http\Response
     */
-    public function destroy(Reminder $reminder)
+    public function destroy(Reminder $reminder,$showHash,$reminderHash)
     {
-        //
+        $reminder = $reminder->where('hash','=',$reminderHash)->with('getShow')->first();
+
+
+        session()->flash('msg','Reminder: ' . $reminder->tv . ' @ ' . $reminder->start_time . ' for ' . $reminder->getShow->title . ' has been successfully deleted.');
+        $reminder->destroy($reminder->id);
+        return redirect()->back();
     }
+
+
+
+
     private function formValueGenerator($max,$init,$leadingZero = false) {
         $temp_array = array();
         for($i = $init;$i < $max;$i++) {

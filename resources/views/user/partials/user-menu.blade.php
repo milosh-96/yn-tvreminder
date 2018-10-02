@@ -9,6 +9,7 @@
     <li class="list-group-item section-title">Suggestions</li>
     <li class="list-group-item"><i class="fa fa-star"></i> Most Popular Shows</li>
     <li class="list-group-item section-title">User Settings</li>
+    <li class="list-group-item"><a href="#">Account Settings</a></li>
     <li class="list-group-item">
         <form action="{{route('logout')}}" method="POST">
             @csrf

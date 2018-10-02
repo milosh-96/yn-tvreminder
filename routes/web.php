@@ -51,6 +51,7 @@ Route::prefix('reminder')->group(function() {
 
         Route::get('edit-reminder/{reminderHash}','ReminderController@edit')->name('reminder.edit');
         Route::put('/edit-reminder/{reminderHash}','ReminderController@store')->name('reminder.update');
+        Route::delete('/delete-reminder/{reminderHash}','ReminderController@destroy')->name('reminder.delete');
     });
 });
 Auth::routes();

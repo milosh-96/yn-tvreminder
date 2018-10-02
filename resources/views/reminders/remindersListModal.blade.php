@@ -10,7 +10,21 @@
             <div class="modal-body text-left">
                 <ul class="list-group">
                     @foreach($show->reminders as $reminder)
-                    <li class="list-group-item">{{$reminder->display()}} <a href="{{route('reminder.edit',[$show->hash,$reminder->hash])}}">(edit)</a></li>
+                    <li class="list-group-item">
+                       <div class="row">
+                       <div class="col-10">
+                        {{$reminder->display()}}
+                        </div>
+                        <div class="col-2 text-right">
+                            <a href="{{route('reminder.edit',[$show->hash,$reminder->hash])}}">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a href="{{route('reminder.edit',[$show->hash,$reminder->hash])}}">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </div>
+                       </div>
+                    </li>
                     @endforeach
                 </ul>
             </div>
