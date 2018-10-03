@@ -11,6 +11,10 @@ class Show extends Model
 {
     protected $fillable = ["title","hash","description","user_id","slug","description","cover_url"];
 
+    public function getUser() {
+        return $this->hasOne('App\User','id','user_id');
+    }
+
     public function findByHash($hash) {
         return Show::where('hash','=',$hash)->first();
     }
@@ -31,7 +35,7 @@ class Show extends Model
 
     //filtered by authenticated user //
     public function reminders() {
-        return $this->hasMany('App\Reminder')->where('user_id','=',auth()->user()->id);
+        return $this->hasMany('App\Reminder')->where('user_id','=',$this->user_id);
     }
 
     // not filtered by authenticated user //

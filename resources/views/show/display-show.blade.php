@@ -16,7 +16,7 @@
     <div class="row my-5">
         <div class="col-12">
             <h3>Reminders</h3>
-            <table class="table table-striped table-hover">
+            <table class="table table-striped table-hover table-responsive">
                 <thead>
                     <tr class="text-center">
                         <th></th>
@@ -34,6 +34,8 @@
                     @foreach($show->reminders as $reminder)
                     <tr class="text-center">
                         <td>
+                        @if(auth()->check())
+                        @if(auth()->user()->id == $show->getUser->id)
                             <a href="{{route('reminder.edit',[$show->hash,$reminder->hash])}}">
                                 <i class="fa fa-edit"></i>
                             </a>
@@ -43,6 +45,8 @@
                                     <button type="submit" class="link"><i class="fa fa-trash"></i></button>
                                 </form>
                             </a>
+                        @endif
+                        @endif
                         </td>
                         <td>{{$reminder->tv}}</td>
                         <td>{{$reminder->monday ? $reminder->formattedTime() : '--:--'}}</td>

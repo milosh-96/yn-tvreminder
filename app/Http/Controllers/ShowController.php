@@ -114,7 +114,9 @@ class ShowController extends Controller
         public function show(Show $show,$hash)
         {
            $show = $show->findByHash($hash);
-
+            if(!$show) {
+                abort(404);
+            }
            //return $show;
             if($show->isPublic() OR $show->user_id == auth()->user()->id ) {
                
