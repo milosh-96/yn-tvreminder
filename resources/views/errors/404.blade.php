@@ -16,5 +16,6 @@
 <div class="col-12">
     <h2>404 - Signal Lost!</h2>
     <p>Requested resource hasn't been found.</p>
+    <p><em>Error message: {{$exception->getMessage()}}</em></p>
 </div>
 @endsection

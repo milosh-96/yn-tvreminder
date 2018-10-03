@@ -38,6 +38,9 @@ class ReminderController extends Controller
     public function create(Show $show,$hash)
     {
         $show = $show->findByHash($hash);
+        if(!$show) {
+            abort(404);
+        }
         $formValues = $this->formValues($show);
         $formValues["weekly_days"][date("w")] = true;
         
@@ -53,6 +56,7 @@ class ReminderController extends Controller
     public function store(Show $show,Request $request,$showHash,$reminderHash = null)
     {
         $show = $show->findByHash($showHash);
+       
         
         $hash = substr(Str::uuid($show->title . '-' . auth()->user()->id . '-' . date("Y-m-d H:i")),0,7);
         
@@ -109,6 +113,9 @@ class ReminderController extends Controller
     public function edit(Show $show,Reminder $reminder,$showHash,$reminderHash)
     {
         $show = $show->findByHash($showHash);
+        if(!$show) {
+            abort(404,"the show doesn't exist!");
+        }
         $formValues = $this->formValues($show);
         $formValues["reminder"] = $reminder->where("hash","=",$reminderHash)->first();
         $formValues["type"] = "edit";

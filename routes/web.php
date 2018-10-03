@@ -27,6 +27,9 @@ Route::get('/','HomeController@index')->name('index');
 
 Route::prefix('user')->group(function() {
     Route::get('library','UserController@library')->name('user.library');
+    Route::prefix('account')->group(function() {
+        Route::get('edit','UserController@edit')->name('user.account.edit');
+    });
 });
 
 Route::prefix('show')->group(function() {

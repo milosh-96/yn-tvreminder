@@ -6,7 +6,7 @@
         @csrf
         <input type="hidden" name="_method" value="{{$formValues->form_method}}">
 		<div class="form-check">
-			<input type="checkbox" value="1" id="public" name="public">
+			<input type="checkbox" value="1" id="public" @if($formValues->type == "update") {{$show->isPublic() ? 'checked' : ''}} @endif name="public">
 			<label for="public">Public?</label>
 			<span class="hint">Is the show public?</span>
 		</div>
