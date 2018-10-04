@@ -117,15 +117,20 @@ class ShowController extends Controller
             if(!$show) {
                 abort(404);
             }
+            else {
            //return $show;
-            if($show->isPublic() OR $show->user_id == auth()->user()->id ) {
-               
+            if($show->isPublic()) {
                 return view('show.display-show')->with(['show'=>$show]);
-
+            }
+            elseif(auth()->user()) {
+                if(auth()->user()->id == $show->id) {
+                    return view('show.display-show')->with(['show'=>$show]);
+                }
             }
             else {
                 return redirect()->route('index');
             }
+        }
         }
         
         /**

@@ -12,27 +12,16 @@ use Illuminate\Mail\Markdown;
 |
 */
 
-
-
-// Route::get('/', function () {
-//     if(!auth()->user()) {
-//         return view('layouts.public');    
-//     }
-//     else {
-//         return view('layouts.user');
-//     }
-// })->name('index');
-
 Route::get('/','HomeController@index')->name('index');
 
-Route::prefix('user')->group(function() {
+Route::prefix('/user')->group(function() {
     Route::get('library','UserController@library')->name('user.library');
     Route::prefix('account')->group(function() {
         Route::get('edit','UserController@edit')->name('user.account.edit');
     });
 });
 
-Route::prefix('show')->group(function() {
+Route::prefix('/show')->group(function() {
 
     Route::get('add-new','ShowController@create')->name('show.add');
     Route::post('/','ShowController@store')->name('show.store');
@@ -47,7 +36,7 @@ Route::prefix('show')->group(function() {
     });
 });
 
-Route::prefix('reminder')->group(function() {
+Route::prefix('/reminder')->group(function() {
     Route::prefix('show/{showHash}')->group(function() {
         Route::get('/set-reminder','ReminderController@create')->name('reminder.create');
         Route::post('/set-reminder','ReminderController@store')->name('reminder.store');
@@ -59,4 +48,7 @@ Route::prefix('reminder')->group(function() {
 });
 Auth::routes();
     
+
+
+
     

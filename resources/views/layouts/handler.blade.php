@@ -15,7 +15,7 @@
 </head>
 <body id="@yield('body_id','main')">
     
-    @if((request()->route()->getName() != 'login' && request()->route()->getName() != 'register'))
+@if((request()->route()->getName() != 'register') and (request()->route()->getName() != 'login'))
     @include('layouts.shared.header-bar')
     @if(session()->has('msg'))
     <div class="container">
@@ -37,9 +37,25 @@
     @else 
     @include('layouts.login-register-layout')
     @endif
-    
-    <footer>
-        <small>{{date("Y")}} - TVReminder. All rights are reserved.</small>
+
+    <footer class="bg-dark text-white mt-5">
+        <div class="container-fluid">
+        @if((request()->route()->getName() != 'register') and (request()->route()->getName() != 'login'))
+        <div class="row">
+            <div class="col-12 col-md-4 py-3">
+                <p>
+                <img src="{{asset('images/logo.png')}}" height="22px"> is a place where you can create your own TV schedule. You can combine shows, events or movies on TV and get reminded about them.
+                    Also, you can add anything as a "show", our platform doesn't force you to follow EPG schedule. <em>You can do anything</em>.
+                </p>
+            </div>
+            </div>
+            @endif
+            <div class="row">
+                <div class="col">
+                    <small>{{date("Y")}} - TVReminder. All rights are reserved.</small>
+                </div>
+            </div>
+        </div>
     </footer>
     <script src="{{asset('js/app.js')}}"></script>
     @yield('footer_scripts')

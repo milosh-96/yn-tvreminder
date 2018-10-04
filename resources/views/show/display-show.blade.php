@@ -8,6 +8,7 @@
             </div>
         </div>
         <div class="col-6">
+            <small>Show created by <a href="#">{{$show->getUser->user_name}}</a></small>
             <h2>{{$show->title}}</h2>
             <p>{{$show->description}}</p>
         </div>
