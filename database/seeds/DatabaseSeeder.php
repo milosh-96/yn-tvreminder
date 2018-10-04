@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
         //factory(App\Show::class, 200)->create();
         //factory(App\Reminder::class,400)->create();
 
-        factory(App\Show::class, 5)->create(['user_id'=>1])->each(function ($show) {
+        factory(App\Show::class, 200)->create()->each(function ($show) {
             factory(App\Reminder::class, 2)->create([
                 'user_id' => $show->user_id,
                 'show_id' => $show->id

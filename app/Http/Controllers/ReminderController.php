@@ -204,8 +204,8 @@ class ReminderController extends Controller
     }
 
     public function upcoming(Reminder $reminder) {
-        $current_time = date("H:i",strtotime("01:20"));
-        $show_time = date("H:i",strtotime($current_time . " +15 minutes"));
+        $current_time = date("H:i");
+        $show_time = date("H:i",strtotime($current_time . "+15 minutes"));
         
         $current_day = strtolower(date("l"));
 
