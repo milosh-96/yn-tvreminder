@@ -17,6 +17,7 @@
     
 @if((request()->route()->getName() != 'register') and (request()->route()->getName() != 'login'))
     @include('layouts.shared.header-bar')
+    
     @if(session()->has('msg'))
     <div class="container">
         <div class="col-12">

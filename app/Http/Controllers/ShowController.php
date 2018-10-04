@@ -113,24 +113,23 @@ class ShowController extends Controller
         */
         public function show(Show $show,$hash)
         {
-           $show = $show->findByHash($hash);
+            $show = $show->findByHash($hash);
             if(!$show) {
                 abort(404);
             }
             else {
-           //return $show;
-            if($show->isPublic()) {
-                return view('show.display-show')->with(['show'=>$show]);
-            }
-            elseif(auth()->user()) {
-                if(auth()->user()->id == $show->id) {
-                    return view('show.display-show')->with(['show'=>$show]);
+                $view = view('show.display-show')->with(['show'=>$show]);
+                if($show->isPublic()) {
+                    return $view;
                 }
-            }
-            else {
+                if(auth()->check()) {
+                    if(auth()->user()->id == $show->user_id) {
+                        return $view;
+                    }
+                }
                 return redirect()->route('index');
             }
-        }
+            
         }
         
         /**
