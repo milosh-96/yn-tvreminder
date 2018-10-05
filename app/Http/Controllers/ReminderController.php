@@ -12,10 +12,13 @@ use App\Show;
 use App\Reminder;
 
 use App\Jobs\ReminderMailJob;
+use Mail;
 
 use App\Mail\ReminderMail;
 
 use Carbon\Carbon;
+
+
 
 
 
@@ -203,13 +206,18 @@ class ReminderController extends Controller
         );
     }
 
-    public function upcoming(Reminder $reminder) {
+    public static function upcoming(Reminder $reminder) {
         $current_time = date("H:i");
         $show_time = date("H:i",strtotime($current_time . "+15 minutes"));
         
         $current_day = strtolower(date("l"));
 
-        return $reminder->where($current_day,true)->where('start_time',$show_time)->get();
-       
+        $reminders = $reminder->where($current_day,true)->where('start_time',$show_time)->with(['getShow','getUser'])->get();
+        if(!empty($reminders)) {
+            foreach($reminders as $reminder) {
+                Mail::to($reminder->getUser->email)->send(new ReminderMail($reminder));
+            }
+        }
+        return $reminders;
     }
 }

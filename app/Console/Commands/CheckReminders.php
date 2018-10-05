@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 
 use Illuminate\Support\Facades\Artisan;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 
 use App\Reminder;
@@ -40,17 +41,10 @@ class CheckReminders extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(Reminder $reminder)
     {
-        $time_range['from'] = date("H:i",strtotime("-15 minutes"));
-        $time_range['to'] = date("H:i",strtotime("+15 minutes"));
-        // $reminders = Reminder::where('start_time','=',$time_range['from'])->get();
-
-        $reminders = Reminder::all();
-         print("We have found ".count($reminders) . " reminders available at this time!");
-
-         foreach($reminders as $reminder) {
-             Artisan::call("tvreminder:send-reminder-mail",["reminder"=>$reminder->id]);
-         }
+        $output = new ConsoleOutput();
+       $reminders = \App\Http\Controllers\ReminderController::upcoming($reminder);
+       $output->writeln("Hey, we got " . count($reminders)." reminders");
     }
 }
