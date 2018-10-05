@@ -18,6 +18,8 @@ Route::prefix('/user')->group(function() {
     Route::get('library','UserController@library')->name('user.library');
     Route::prefix('account')->group(function() {
         Route::get('edit','UserController@edit')->name('user.account.edit');
+        Route::get('delete','UserController@confirmDestroy')->name('user.account.confirm-delete');
+        Route::delete('delete','UserController@destroy')->name('user.account.delete');
     });
 });
 
