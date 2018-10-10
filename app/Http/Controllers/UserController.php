@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\User;
 class UserController extends Controller
 {
+    protected $redirectTo = '/';
+
     public function __constructor()
     {
         $this->middleware("auth");
