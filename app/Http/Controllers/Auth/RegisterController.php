@@ -10,6 +10,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
+    protected $redirectTo = '/';
+
     /*
     |--------------------------------------------------------------------------
     | Register Controller
