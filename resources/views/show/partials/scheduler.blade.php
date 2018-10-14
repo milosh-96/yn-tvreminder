@@ -48,7 +48,7 @@
                            
                             <?php 
                                 $keyNo = $key;
-                                //$keyNo = $keyNo-1;
+                                $keyNo = $keyNo-1;
                             ?>
                             <option value="{{strtolower($formValues->day_names[$keyNo])}}" @if($value == true)selected="selected" @endif>{{$formValues->day_names[$keyNo]}}</option>
                             
