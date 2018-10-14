@@ -10,3 +10,6 @@ Visit your profile
 @section('title_message')
 Thank you for registering!
 @endsection
+
+
+@section('image','https://media.giphy.com/media/xUPGGDNsLvqsBOhuU0/giphy.gif')
