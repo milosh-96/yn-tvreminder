@@ -47,14 +47,13 @@
                             @foreach($formValues->weekly_days as $key => $value)
                             <?php 
                                 $keyNo = $key;
+                                if($key == 7) {
+                                    $keyNo = $keyNo-1;
+                                }
                             ?>
                            
                             <option value="{{strtolower($formValues->day_names[$keyNo])}}" @if($value == true)selected="selected" @endif>{{$formValues->day_names[$keyNo]}}</option>
-                            <?php
-                             if($key > 0) {
-                                $keyNo = $keyNo-1;
-                            }
-                            ?>
+                            
                            
                             @endforeach
                         </select>
