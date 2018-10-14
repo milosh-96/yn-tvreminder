@@ -45,16 +45,12 @@
                         <select name="days[]" multiple id="days" size="7" class="form-control">
                             <!--ADD SELECTED FIELDS BASED ON DB RECORD WHEN EDIT MODE IS ACTIVE-->
                             @foreach($formValues->weekly_days as $key => $value)
-                            <?php 
-                                $keyNo = $key;
-                                if($key != 0) {
-                                    $keyNo = $keyNo-1;
-                                }
-                            ?>
                            
+                            <?php $keyNo = $key-1; ?>
+                            
                             <option value="{{strtolower($formValues->day_names[$keyNo])}}" @if($value == true)selected="selected" @endif>{{$formValues->day_names[$keyNo]}}</option>
                             
-                           
+                            
                             @endforeach
                         </select>
                     </div>

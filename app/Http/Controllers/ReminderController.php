@@ -45,7 +45,7 @@ class ReminderController extends Controller
             abort(404);
         }
         $formValues = $this->formValues($show);
-        $formValues["weekly_days"][date("w")] = true;
+        $formValues["weekly_days"][date("w") + 1] = true;
         
         return view('show.schedule')->with(['formValues'=>(object) $formValues]);
     }
