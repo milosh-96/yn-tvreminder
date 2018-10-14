@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
+use App\Mail\ThankYouRegistrationMail;
 class RegisterController extends Controller
 {
     protected $redirectTo = '/';
@@ -37,6 +38,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
+        $this->redirectTo = route('index');
         $this->middleware('guest');
     }
 
@@ -71,6 +73,10 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        if($user) {
+            Mail::to($user->email)->send(new ThankYouRegistrationMail($user));
+        }
+
         return $user;
     }
 }

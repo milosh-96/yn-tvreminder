@@ -26,12 +26,12 @@
                     <tr>
                       <td>
                         <p>Hi there,</p>
-                        <h2>{{$reminder->getShow->title}} is about to begin!</h2>
+                        <h2>@yield('title_message')</h2>
                         <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                           <tbody>
                             <tr style="max-height:300px">
                                 <td>
-                                    <img src="{{$reminder->getShow->cover_url}}" width="100%" alt="">
+                                    <img src="@yield('image',asset('images/logo.png'))" width="100%" alt="">
                                 </td>
                             </tr>
                             <tr>
@@ -39,7 +39,7 @@
                                 <table border="0" cellpadding="0" cellspacing="0">
                                   <tbody>
                                     <tr>
-                                      <td> <a href="#" target="_blank">@yield('call_to_action')</a> </td>
+                                      <td><a href="@yield('cta_link',env('APP_URL'))" target="_blank">@yield('call_to_action')</a> </td>
                                     </tr>
                                   </tbody>
                                 </table>
