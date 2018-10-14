@@ -31,7 +31,7 @@
                           <tbody>
                             <tr style="max-height:300px">
                                 <td>
-                                    @yield('image')
+                                    <img src="@yield('image',asset('images/logo.png'))" width="100%" alt="">
                                 </td>
                             </tr>
                             <tr>

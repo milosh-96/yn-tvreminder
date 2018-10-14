@@ -11,6 +11,4 @@ Tune in on {{$reminder->tv}} at {{$reminder->formattedTime()}}
 {{$reminder->getShow->title}} is about to begin!
 @endsection
 
-@section('image')
-<img src="{{$reminder->getShow->cover_url}}" width="100%" alt="">
-@endsection
+@section('image',$reminder->getShow->cover_url)
