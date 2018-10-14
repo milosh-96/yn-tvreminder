@@ -47,7 +47,7 @@
                             @foreach($formValues->weekly_days as $key => $value)
                             <?php 
                                 $keyNo = $key;
-                                if($key == 7) {
+                                if($key != 0) {
                                     $keyNo = $keyNo-1;
                                 }
                             ?>
