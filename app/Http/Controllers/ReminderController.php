@@ -230,7 +230,6 @@ class ReminderController extends Controller
                 });
             });
         })->where('start_time',$show_time)->with('getUser')->get();
-        return $reminders;
         if(!empty($reminders)) {
             foreach($reminders as $reminder) {
                 return $reminder;
