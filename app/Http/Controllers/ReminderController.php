@@ -229,7 +229,7 @@ class ReminderController extends Controller
                     $query->where("onetime_event",true)->where("onetime_date",date("Y-m-d"));
                 });
             });
-        })->where('start_time',$show_time)->with('getUser')->get();
+        })->where('start_time',$show_time)->with('getShow','getUser')->get();
         if(!empty($reminders)) {
             foreach($reminders as $reminder) {
                 return $reminder;
