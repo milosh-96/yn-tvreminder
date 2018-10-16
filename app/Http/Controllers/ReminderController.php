@@ -232,7 +232,6 @@ class ReminderController extends Controller
         })->where('start_time',$show_time)->with('getShow','getUser')->get();
         if(!empty($reminders)) {
             foreach($reminders as $reminder) {
-                return $reminder;
                 Mail::to($reminder->getUser->email)->send(new ReminderMail($reminder));
             }
         }
