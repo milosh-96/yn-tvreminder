@@ -9,7 +9,7 @@ class Reminder extends Model
 {
     use Notifiable;
 
-    protected $fillable = ["hash","monday","tuesday","wednesday","thursday","friday","saturday","sunday","tv","weekly","user_id","show_id","start_time","end_time"];
+    protected $fillable = ["hash","monday","tuesday","wednesday","thursday","friday","saturday","sunday","tv","weekly","user_id","show_id","start_time","end_time","onetime_event","onetime_date"];
 
     public function findByHash($hash) {
         return Reminder::where('hash','=',$hash)->with('getShow')->first();
@@ -34,8 +34,8 @@ class Reminder extends Model
     }
     
     public function display() {
-        
         $output = '';
+        if($this->weekly) {
 
         $output .= $this->monday ? "M " : "";
         $output .= $this->tuesday ? "Tu " : "";
@@ -46,7 +46,13 @@ class Reminder extends Model
         $output .= $this->sunday ? "Su " : "";
 
         //
-        $output .= "@ " . date("H:i",strtotime($this->start_time)) . " on " . $this->tv;
+        }
+        if($this->onetime_event) {
+            $output .= date("d.m.Y.",strtotime($this->onetime_date));
+        }
+        $output .= " @ " . date("H:i",strtotime($this->start_time)) . " on " . $this->tv;
+
+       
         return $output;
     }
 

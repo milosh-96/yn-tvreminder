@@ -75,11 +75,18 @@ class ReminderController extends Controller
         
         if($request->repeat_type == "weekly") {
             $days = array("monday"=>false,"tuesday"=>false,"wednesday"=>false,"thursday"=>false,"friday"=>false,"saturday"=>false,"sunday"=>false);
-            
+            $data = array("weekly"=>true,"onetime_event"=>false);
             foreach($request->days as $day) {
                 $days[$day] = true;
             }
-            $object = array_merge($fields,$days);
+            $object = array_merge($fields,$days,$data);
+        }
+        //OneTime//
+        elseif($request->repeat_type == "onetime") {
+
+            $date = date("Y-m-d",strtotime($request->year."-".$request->month."-".$request->day));
+            $data = array("onetime_event"=>true,"weekly"=>false,"onetime_date"=>$date);
+            $object = array_merge($fields,$data);
         }   
         $reminder = null;
         switch($request->_method) {
@@ -212,9 +219,21 @@ class ReminderController extends Controller
         
         $current_day = strtolower(date("l"));
 
-        $reminders = $reminder->where($current_day,true)->where('start_time',$show_time)->with(['getShow','getUser'])->get();
+        //$reminders = $reminder->where('weekly',true)->where($current_day,true)->where('start_time',$show_time)->with(['getShow','getUser'])->get();
+        
+        $reminders = $reminder->where(function($q) use ($current_day,$show_time) {
+            $q->where(function($query) use ($current_day,$show_time) {
+                $query->where("weekly",true)->where($current_day,true);
+            })->orWhere(function($q) {
+                $q->where(function($query) {
+                    $query->where("onetime_event",true)->where("onetime_date",date("Y-m-d"));
+                });
+            });
+        })->where('start_time',$show_time)->with('getUser')->get();
+        return $reminders;
         if(!empty($reminders)) {
             foreach($reminders as $reminder) {
+                return $reminder;
                 Mail::to($reminder->getUser->email)->send(new ReminderMail($reminder));
             }
         }
