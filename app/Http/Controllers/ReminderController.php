@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Artisan;
 
 use App\Show;
 use App\Reminder;
+use App\Notifications\PushRemind;
 
 use App\Jobs\ReminderMailJob;
 use Mail;
@@ -240,7 +241,11 @@ class ReminderController extends Controller
     }
 
     public function pushMsg(Reminder $reminder) {
-        $reminder = $reminder->findByHash('78d0c70d');
-        Mail::to($reminder->getUser->email)->send(new ReminderMail($reminder));
+        $reminder = $reminder->findByHash('78d0c70d')->first();
+        $push = auth()->user()->notify(new PushRemind($reminder));
+        var_dump($push);
+        if($push) {
+            echo "OK";
+        }
     }
 }

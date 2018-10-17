@@ -35,4 +35,9 @@ class UserController extends Controller
    public function confirmDestroy() {
        return view('user.account.delete');
    }
+
+   public function updateSubscription(User $user,Request $request) {
+        print_r($request->all()) .  ' B';
+        $request->user()->updatePushSubscription($request->endpoint,$request->key,$request->token);
+   }
 }

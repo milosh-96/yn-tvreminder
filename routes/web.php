@@ -21,6 +21,8 @@ Route::prefix('/user')->group(function() {
         Route::get('delete','UserController@confirmDestroy')->name('user.account.confirm-delete');
         Route::delete('delete','UserController@destroy')->name('user.account.delete');
     });
+    Route::post('/push/subscribe','UserController@updateSubscription')->name('user.push-subscribe');
+
 });
 
 Route::prefix('/show')->group(function() {
@@ -57,3 +59,4 @@ Route::prefix('dev-only')->group(function() {
     Route::get('push','ReminderController@pushMsg');
 });
     
+
