@@ -54,5 +54,6 @@ Auth::routes();
 
 Route::prefix('dev-only')->group(function() {
     Route::get('schedule','ReminderController@upcoming');
+    Route::get('push','ReminderController@pushMsg');
 });
     

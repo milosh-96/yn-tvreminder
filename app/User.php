@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-
+use NotificationChannels\WebPush\HasPushSubscriptions;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 
@@ -10,7 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
-
+    use HasPushSubscriptions;
     /**
      * The attributes that are mass assignable.
      *

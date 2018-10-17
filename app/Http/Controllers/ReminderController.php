@@ -17,6 +17,7 @@ use Mail;
 use App\Mail\ReminderMail;
 
 use Carbon\Carbon;
+use NotificationChannels\WebPush\WebPushMessage;
 
 
 
@@ -236,5 +237,10 @@ class ReminderController extends Controller
             }
         }
         return $reminders;
+    }
+
+    public function pushMsg(Reminder $reminder) {
+        $reminder = $reminder->findByHash('78d0c70d');
+        Mail::to($reminder->getUser->email)->send(new ReminderMail($reminder));
     }
 }
