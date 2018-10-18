@@ -237,15 +237,12 @@ class ReminderController extends Controller
                 Mail::to($reminder->getUser->email)->send(new ReminderMail($reminder));
             }
         }
+
         return $reminders;
     }
 
     public function pushMsg(Reminder $reminder) {
-        $reminder = $reminder->findByHash('78d0c70d')->first();
-        $push = auth()->user()->notify(new PushRemind($reminder));
-        var_dump($push);
-        if($push) {
-            echo "OK";
-        }
+        $reminder = $reminder->where('hash','4ee39d3')->with(['getShow','getUser'])->first();
+        $reminder->getUser->notify(new PushRemind($reminder));
     }
 }
