@@ -242,7 +242,11 @@ class ReminderController extends Controller
     }
 
     public function pushMsg(Reminder $reminder) {
-        $reminder = $reminder->where('hash','4ee39d3')->with(['getShow','getUser'])->first();
+        $reminder = $reminder->where('hash','af5af9f')->with(['getShow','getUser'])->first();
         $reminder->getUser->notify(new PushRemind($reminder));
+
+        return response()->json([
+            'success' => true
+          ]);
     }
 }

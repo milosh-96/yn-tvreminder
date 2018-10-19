@@ -37,7 +37,9 @@ class UserController extends Controller
    }
 
    public function updateSubscription(User $user,Request $request) {
-        print_r($request->all()) .  ' B';
         $request->user()->updatePushSubscription($request->endpoint,$request->key,$request->token);
+        return response()->json([
+            'success' => true
+          ]);
    }
 }
