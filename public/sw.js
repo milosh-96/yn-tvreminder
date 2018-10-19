@@ -6,7 +6,7 @@ self.addEventListener('push', function(event) {
       let title = data.title;
       let options = {
         body: data.body,
-        icon: 'images/logo.png',
+        icon: data.image,
         badge:'images/logo.png',
         image:data.image
       };
