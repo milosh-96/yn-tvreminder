@@ -54,8 +54,8 @@ class PushRemind extends Notification
         return (new WebPushMessage)
             ->title('Approved!')
             ->body('Your account was approved!')
-            ->action('View account', 'view_account');
-            // ->data(['id' => $notification->id])
+            ->action('View account', 'view_account')
+            ->data(['title' => $this->reminder->title]);
             // ->badge()
             // ->dir()
             // ->image()
