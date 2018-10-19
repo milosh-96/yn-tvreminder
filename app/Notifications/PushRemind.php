@@ -59,12 +59,12 @@ class PushRemind extends Notification
             ->action('View account', 'view_account')
             // ->badge()
             // ->dir()
-            ->image($this->reminder->getShow->cover_url);
+            ->image($this->reminder->getShow->cover_url)
             // ->lang()
             // ->renotify()
             // ->requireInteraction()
             // ->tag()
-            // ->vibrate()
+            ->vibrate();
     }
     /**
      * Get the array representation of the notification.
