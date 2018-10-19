@@ -52,7 +52,7 @@ class PushRemind extends Notification
     public function toWebPush($notifiable, $notification)
     {
         $title = "Reminder: " . $this->reminder->getShow->title;
-        $textBody = "The event begins in 15 minutes on ".$this->reminder->tv."! (" . $this->reminder->start_time . ")";
+        $textBody = "The event begins in 15 minutes on ".$this->reminder->tv."! (" . $this->reminder->formattedTime() . ")";
         return (new WebPushMessage)
             ->title($title)
             ->body($textBody)
