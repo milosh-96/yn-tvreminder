@@ -64,7 +64,7 @@ class PushRemind extends Notification
             // ->renotify()
             // ->requireInteraction()
             // ->tag()
-            ->vibrate();
+            ->vibrate([500,110,500,110,450,110,200,110,170,40,450,110,200,110,170,40,500]);
     }
     /**
      * Get the array representation of the notification.
