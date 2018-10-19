@@ -9,7 +9,7 @@ self.addEventListener('push', function(event) {
       badge:'images/logo.png'
     };
 
-    console.log(title);
+    console.log(event);
     event.waitUntil(self.registration.showNotification(title,options));
   });
   
