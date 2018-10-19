@@ -51,14 +51,15 @@ class PushRemind extends Notification
 
     public function toWebPush($notifiable, $notification)
     {
+        $title = "Reminder: " . $this->reminder->getShow->title;
+        $textBody = "The event begins in 15 minutes on ".$this->reminder->tv."! (" . $this->reminder->start_time . ")";
         return (new WebPushMessage)
-            ->title('Approved!')
+            ->title()
             ->body('Your account was approved!')
             ->action('View account', 'view_account')
-            ->data(['title' => $this->reminder->title]);
             // ->badge()
             // ->dir()
-            // ->image()
+            ->image($this->reminder->getShow->cover_url);
             // ->lang()
             // ->renotify()
             // ->requireInteraction()
