@@ -31,11 +31,18 @@
 @if((request()->route()->getName() != 'register') and (request()->route()->getName() != 'login'))
     @include('layouts.shared.header-bar')
     
-    @if(session()->has('msg'))
+    @if(session()->has('msg') || ($errors->any()))
     <div class="container">
         <div class="col-12">
-           <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {!!session()->get('msg')!!}
+           <div class="alert @if(session()->has('msg') alert-success@endif @if($errors->any()) alert-danger @endif alert-dismissible fade show" role="alert">
+                @if(session()->has('msg')) {!!session()->get('msg')!!} @endif
+                @if($errors->any())
+                <div>
+                @foreach($errors->all() as $error)
+                    <p>{{$error}}</p>
+                @endforeach
+                </div>
+                @endif
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
