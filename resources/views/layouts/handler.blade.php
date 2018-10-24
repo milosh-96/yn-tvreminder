@@ -34,7 +34,7 @@
     @if(session()->has('msg') || ($errors->any()))
     <div class="container">
         <div class="col-12">
-           <div class="alert @if(session()->has('msg') alert-success@endif @if($errors->any()) alert-danger @endif alert-dismissible fade show" role="alert">
+           <div class="alert @if(session()->has('msg')) alert-success @endif @if($errors->any()) alert-danger @endif alert-dismissible fade show" role="alert">
                 @if(session()->has('msg')) {!!session()->get('msg')!!} @endif
                 @if($errors->any())
                 <div>
