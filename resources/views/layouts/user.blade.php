@@ -1,3 +1,4 @@
+    @section('title','Profile: '.auth()->user()->user_name)
     <div class="container pb-5 page">
         <div class="row header">
             <div class="col-3">

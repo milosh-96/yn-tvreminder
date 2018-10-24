@@ -1,4 +1,5 @@
 @extends('layouts.handler')
+@section('title','Register a new Account')
 @section('body_id','login-register')
 
 @section('content')

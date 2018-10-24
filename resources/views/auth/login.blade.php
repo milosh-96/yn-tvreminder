@@ -1,4 +1,5 @@
 @extends('layouts.handler')
+@section('title','Login to your Account')
 @section('body_id','login-register')
 @section('content')
 <div class="col">

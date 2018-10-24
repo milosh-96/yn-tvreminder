@@ -1,4 +1,5 @@
 @extends('layouts.handler')
+@section('title','Your Library')
 @section('content')
 <div class="col-12">
     <h3>Your Library</h3>

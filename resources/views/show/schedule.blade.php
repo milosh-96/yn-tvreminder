@@ -1,4 +1,5 @@
 @extends('layouts.handler')
+@section('title','Add New Reminder for '.$formValues->show->title)
 @section('content')
 @include('show.partials.scheduler')
 

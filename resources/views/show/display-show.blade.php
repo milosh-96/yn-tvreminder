@@ -1,4 +1,5 @@
 @extends('layouts.handler')
+@section('title','Show: '.$show->title)
 @section('content')
 <div class="col-12">
     <div class="row">

@@ -1,5 +1,5 @@
 @extends('layouts.handler')
-@section('title','Account Settings: Edit details')
+@section('title','! Account Removal: Confirmation !')
 @section('content')
 <div class="col-12">
     <h2><i class="fas fa-exclamation-triangle"></i> Account Deletion</h2>

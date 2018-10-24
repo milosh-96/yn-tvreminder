@@ -1,4 +1,5 @@
 @extends('layouts.handler')
+@section('title','Add a new Show')
 @section('content')
 
 <div class="col-12">
