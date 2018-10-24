@@ -34,6 +34,16 @@ class ReminderController extends Controller
     public function index()
     {
     }
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'tv' => 'required|string|max:255',
+            'hour' => 'required|number',
+            'minute' => 'required|number',
+            'repeat_type' => 'required',
+        ]);
+    }
     
     /**
     * Show the form for creating a new resource.
