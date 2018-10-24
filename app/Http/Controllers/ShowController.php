@@ -83,7 +83,7 @@ class ShowController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'description' => 'required',
-            'cover_url' => 'string'
+            'cover_url' => 'string|nullable'
             ]);
             if($type == "update") {
                 $show->title = $request->title;

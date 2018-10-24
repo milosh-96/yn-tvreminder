@@ -49,8 +49,21 @@
 @section('left_side')
 <div class="card" style="opacity: 0.5">
     <div class="card-body">
+        <h5 class="card-title">Help</h5>
+        <p class="card-text">
+            <strong>Add To Library</strong>: The show will be added to your library, and you don't have to set reminders. You can do this later.
+            <br>
+            <strong>Add and Schedule</strong>: The show will be addec to your library, but the second step is scheduling.
+        </p>
+    </div>
+</div>
+<hr>
+<div class="card" style="opacity: 0.5">
+    <div class="card-body">
         <h5 class="card-title">Tips</h5>
-        <p class="card-text">You should add a reminder offset. If you don't set it, you will be reminded at the time when the show begins. You could miss first minutes of the show.</p>
+        <p class="card-text">
+            You can add anything! It can be series of the shows (two shows in a row on some TV channel), web show (on Netflix, Hulu or You Tube) or anything you like!   
+        </p>
     </div>
 </div>
 
