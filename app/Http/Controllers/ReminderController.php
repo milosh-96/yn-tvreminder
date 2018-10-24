@@ -35,15 +35,7 @@ class ReminderController extends Controller
     {
     }
 
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'tv' => 'required|string|max:255',
-            'hour' => 'required|number',
-            'minute' => 'required|number',
-            'repeat_type' => 'required',
-        ]);
-    }
+    
     
     /**
     * Show the form for creating a new resource.
@@ -71,6 +63,9 @@ class ReminderController extends Controller
     */
     public function store(Show $show,Request $request,$showHash,$reminderHash = null)
     {
+
+
+
         $show = $show->findByHash($showHash);
        
         
@@ -78,6 +73,15 @@ class ReminderController extends Controller
         
         $object = null;
         
+        $validatedData = $request->validate(
+            [
+                'tv' => 'required|string|max:255',
+                'hour' => 'required|number',
+                'hour' => 'required|number',
+                'repeat_type' => 'required'
+            ]
+        );
+
         $fields = array("tv"=>$request->tv_channel,"start_time"=>$request->hour . ':' . $request->minute);
         
         if($request->_method == "POST") {
