@@ -13,7 +13,7 @@
                 </div>
                 <div class="col-12 col-md-6">
                     <div id="date-picker" class="date-picker collapse">
-                        <select class="form-control w-25 d-inline" @if($reminder->onetime_event) style="display:block;" @endif name="day" id="day">
+                        <select class="form-control w-25 d-inline" @if($formValues->onetime) style="display:block;" @endif name="day" id="day">
                             @foreach($formValues->days as $day)
                             @if($formValues->current_date->day == $day) 
                             <option selected="selected" value="{{$day}}">{{$day}}</option>
@@ -41,7 +41,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div id="days-picker" class="days-picker" style="@if($reminder->onetime_event) style="display:none;" @endif ;min-height: 100px">
+                    <div id="days-picker" class="days-picker" style="@if($formValues->onetime) style="display:none;" @endif ;min-height: 100px">
                         <select name="days[]" multiple id="days" size="7" class="form-control">
                             <!--ADD SELECTED FIELDS BASED ON DB RECORD WHEN EDIT MODE IS ACTIVE-->
                             @foreach($formValues->weekly_days as $key => $value)
