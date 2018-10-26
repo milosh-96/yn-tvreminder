@@ -143,11 +143,12 @@ class ReminderController extends Controller
         if(!$show) {
             abort(404,"the show doesn't exist!");
         }
+        $reminder = $reminder->where("hash","=",$reminderHash)->first();
         $formValues = $this->formValues($show);
-        $formValues["reminder"] = $reminder->where("hash","=",$reminderHash)->first();
+        $formValues["reminder"] = $reminder;
         $formValues["type"] = "edit";
         $formValues["form_method"] = "PUT";
-        $formValues["onetime_event"] = $reminder->onetime_event ? 1 : 0;
+        $formValues["onetime"] = $reminder->onetime_event ? 1 : 0;
         $formValues["weekly"] = $reminder->weekly ? 1 : 0;
         $formValues["form_route"] = route("reminder.update",[$show->hash,$formValues["reminder"]->hash]);
         $formValues["weekly_days"]["1"] = $formValues["reminder"]->monday ? true : false;
