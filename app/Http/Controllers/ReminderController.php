@@ -76,8 +76,8 @@ class ReminderController extends Controller
         $validatedData = $request->validate(
             [
                 'tv_channel' => 'required|string|max:255',
-                'hour' => 'required|integer',
-                'minute' => 'required|integer',
+                'hour' => 'required|max:2',
+                'minute' => 'required|max:2',
                 'repeat_type' => 'required'
             ]
         );
