@@ -147,6 +147,8 @@ class ReminderController extends Controller
         $formValues["reminder"] = $reminder->where("hash","=",$reminderHash)->first();
         $formValues["type"] = "edit";
         $formValues["form_method"] = "PUT";
+        $formValues["onetime"] = $reminder->onetime_event ? 1 : 0;
+        $formValues["weekly"] = $reminder->weekly ? 1 : 0;
         $formValues["form_route"] = route("reminder.update",[$show->hash,$formValues["reminder"]->hash]);
         $formValues["weekly_days"]["1"] = $formValues["reminder"]->monday ? true : false;
         $formValues["weekly_days"]["2"] = $formValues["reminder"]->tuesday ? true : false;
@@ -225,8 +227,9 @@ class ReminderController extends Controller
             "day_names"=>array("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"),
             "weekly_days"=>array("1"=>false,"2"=>false,"3"=>false,"4"=>false,"5"=>false,"6"=>false,"7"=>false),
             "current_day_in_week"=>date("N"),
-            "tv"=>null
-            
+            "onetime" => 0,
+            "weekly" => 1
+
         );
     }
 

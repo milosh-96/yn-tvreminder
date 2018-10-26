@@ -5,10 +5,10 @@
 <input type="hidden" name="_method" value="{{$formValues->form_method}}">
                     <div class="tyle-selector py-2">
                         <label>One-Time</label>
-                        <input type="radio" name="repeat_type" value="onetime" onclick="activateOneTime()">
+                        <input type="radio" @if($formValues->onetime) checked @endif name="repeat_type" value="onetime" onclick="activateOneTime()">
                         <span class="px-3">or</span>  
                         <label>Weekly</label>
-                        <input type="radio" checked name="repeat_type" value="weekly" onclick="activateWeekly()">
+                        <input type="radio" @if($formValues->weekly) checked @endif name="repeat_type" value="weekly" onclick="activateWeekly()">
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
