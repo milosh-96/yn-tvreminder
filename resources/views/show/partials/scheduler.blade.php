@@ -12,8 +12,8 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
-                    <div id="date-picker" class="date-picker collapse">
-                        <select class="form-control w-25 d-inline" @if($formValues->onetime) style="display:block;" @endif name="day" id="day">
+                    <div id="date-picker" class="date-picker @if(!$formValues->onetime) collapse @endif">
+                        <select class="form-control w-25 d-inline" @endif name="day" id="day">
                             @foreach($formValues->days as $day)
                             @if($formValues->current_date->day == $day) 
                             <option selected="selected" value="{{$day}}">{{$day}}</option>
