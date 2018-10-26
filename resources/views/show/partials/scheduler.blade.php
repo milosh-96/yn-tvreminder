@@ -41,7 +41,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div id="days-picker" class="days-picker" style="@if($formValues->onetime) style="display:none;" @endif ;min-height: 100px">
+                    <div id="days-picker" class="days-picker" style="@if($formValues->onetime) display:none; @endif min-height: 100px">
                         <select name="days[]" multiple id="days" size="7" class="form-control">
                             <!--ADD SELECTED FIELDS BASED ON DB RECORD WHEN EDIT MODE IS ACTIVE-->
                             @foreach($formValues->weekly_days as $key => $value)
