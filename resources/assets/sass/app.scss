@@ -13,7 +13,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   &#main {
-    background: #f2f2f2;
+    background: #fff;
   }
   &#login-register {
     background: rgb(44,62,80);
@@ -90,6 +90,7 @@ button {
   height: 50px;
 }
 
+.user-menu {
 ul {
   .section-title {
     font-size:12px;
@@ -97,7 +98,10 @@ ul {
     color:#fff;
     background:$secondary;
   }
-  
+  .list-group-item {
+    border:0;
+  }
+}
 }
 .form-group {
   padding-bottom: 20px;

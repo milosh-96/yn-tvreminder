@@ -10487,7 +10487,7 @@ body {
 }
 
 body#main {
-  background: #f2f2f2;
+  background: #fff;
 }
 
 body#login-register {
@@ -10569,11 +10569,15 @@ button.link:hover {
   height: 50px;
 }
 
-ul .section-title {
+.user-menu ul .section-title {
   font-size: 12px;
   padding: 5px 10px;
   color: #fff;
   background: #d35400;
+}
+
+.user-menu ul .list-group-item {
+  border: 0;
 }
 
 .form-group {

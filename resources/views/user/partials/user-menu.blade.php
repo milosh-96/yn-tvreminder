@@ -1,4 +1,4 @@
-<ul class="list-group">
+<ul class="list-group user-menu">
     @if(auth()->user())
     <li class="list-group-item section-title">General</li>
     <li class="list-group-item"><a href="#"><span class="fa fa-user icon"></span> Home</a></li>
