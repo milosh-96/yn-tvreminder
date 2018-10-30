@@ -78,7 +78,7 @@
                             @endforeach
                         </select>
                         <span class="d-inline px-2">on</span>
-                        <input type="text" class="w-25 form-control d-inline" name="tv_channel" placeholder="TV channel" value="{{$formValues->tv}}">
+                        <input type="text" class="w-25 form-control d-inline" name="tv_channel" placeholder="TV channel" value="@if($formValues->type == "create") $formValues->tv @endif">
                     </div>
                     <hr>
                     <div class="form-check">
