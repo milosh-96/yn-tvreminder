@@ -10569,14 +10569,14 @@ button.link:hover {
   height: 50px;
 }
 
-.user-menu ul .section-title {
+ul.user-menu .section-title {
   font-size: 12px;
   padding: 5px 10px;
   color: #fff;
   background: #d35400;
 }
 
-.user-menu ul .list-group-item {
+ul.user-menu .list-group-item {
   border: 0;
 }
 
