@@ -136,5 +136,10 @@ ul {
   @include tvreminderGradient();
   color: #fff;
 }
-
+.items {
+  .card {
+    border: 0;
+    margin:5px 0;
+  }
+}
 
