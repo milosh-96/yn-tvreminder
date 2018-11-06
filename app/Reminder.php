@@ -52,7 +52,7 @@ class Reminder extends Model
         if($this->onetime_event) {
             $output .= date("d.m.Y.",strtotime($this->onetime_date));
         }
-        $output .= " @ " . date("H:i",strtotime($this->start_time)) . " on " . $this->tv;
+        $output .= " @ " . $this->formattedTime() . " on " . $this->tv;
 
        
         return $output;
