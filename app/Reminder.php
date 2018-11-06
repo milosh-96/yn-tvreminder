@@ -23,7 +23,7 @@ class Reminder extends Model
     }
 
     public function formattedTime() {
-        $date = new \DateTime($this->start_time,[$timezone = auth()->user()->timezone]);
+        $date = new \DateTime($this->start_time,auth()->user()->timezone);
         return $date->format("H:i");
         
     }
