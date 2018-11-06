@@ -23,7 +23,9 @@ class Reminder extends Model
     }
 
     public function formattedTime() {
-        return date("H:i",strtotime($this->start_time));
+        $date = new \DateTime($this->start_time,[$timezone = auth()->user()->timezone]);
+        return $date->format("H:i");
+        
     }
     public function getTodayReminders() {
         $day = strtolower(date("l"));
