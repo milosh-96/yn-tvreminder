@@ -6,5 +6,12 @@
     <div class="form-group">
         <a href="{{route('user.account.confirm-delete')}}" class="btn btn-danger">Delete Account</a>
     </div>
+
+    <div class="form-group">
+        Your Timezone: <select name="" id="">
+            @foreach(\DateTimeZone::listIdentifiers(DateTimeZone::ALL) as $tz)
+            <option value="">{{$tz}}</option>
+        </select>
+    </div>
 </div>
 @endsection
