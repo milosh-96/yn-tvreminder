@@ -10,7 +10,7 @@
     <div class="form-group">
         Your Timezone: <select name="" id="">
             @foreach(\DateTimeZone::listIdentifiers(DateTimeZone::ALL) as $tz)
-            <option value="">{{$tz}}</option>
+            <option value="{{$tz}}" {{auth()->user()->timezone == $tz) ? 'selected' : ''}}>{{$tz}}</option>
             @endforeach
         </select>
     </div>
