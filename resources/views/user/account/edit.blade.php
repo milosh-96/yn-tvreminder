@@ -11,6 +11,7 @@
         Your Timezone: <select name="" id="">
             @foreach(\DateTimeZone::listIdentifiers(DateTimeZone::ALL) as $tz)
             <option value="">{{$tz}}</option>
+            @endforeach
         </select>
     </div>
 </div>
