@@ -84,7 +84,7 @@
     <i class="fas fa-chevron-left"></i> 
     <span class="sr-only">Previous</span>
   </a>
-  <a class="carousel-control-next" href="#tipsSliderIndicators" role="button" data-slide="next">
+  <a class="carousel-control-next" href="#tipsSliderIndicators" style="color:orange" role="button" data-slide="next">
     <i class="fas fa-chevron-right"></i>
     <span class="sr-only">Next</span>
   </a>
