@@ -49,11 +49,11 @@
 
 @section('left_side')
 
-<div id="tipsSliderIndicators" class="carousel slide" data-ride="carousel">
+<div id="tipsSlider" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
-    <li data-target="#tipsSliderIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#tipsSliderIndicators" data-slide-to="1"></li>
-    <li data-target="#tipsSliderIndicators" data-slide-to="2"></li>
+    <li data-target="#tipsSlider" data-slide-to="0" class="active"></li>
+    <li data-target="#tipsSlider" data-slide-to="1"></li>
+    <li data-target="#tipsSlider" data-slide-to="2"></li>
   </ol>
   <div class="carousel-inner">
     <div class="carousel-item active">
@@ -80,11 +80,11 @@
 </div>
     </div>
   </div>
-  <a class="carousel-control-prev" href="#tipsSliderIndicators" style="color:orange" role="button" data-slide="prev">
+  <a class="carousel-control-prev" href="#tipsSlider" style="color:orange" role="button" data-slide="prev">
     <i class="fas fa-arrow-left"></i> 
     <span class="sr-only">Previous</span>
   </a>
-  <a class="carousel-control-next" href="#tipsSliderIndicators" style="color:orange" role="button" data-slide="next">
+  <a class="carousel-control-next" href="#tipsSlider" style="color:orange" role="button" data-slide="next">
     <i class="fas fa-arrow-right"></i>
     <span class="sr-only">Next</span>
   </a>
