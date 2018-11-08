@@ -81,11 +81,11 @@
     </div>
   </div>
   <a class="carousel-control-prev" href="#tipsSliderIndicators" style="color:orange" role="button" data-slide="prev">
-    <i class="fas fa-chevron-left"></i> 
+    <i class="fas fa-arrow-left"></i> 
     <span class="sr-only">Previous</span>
   </a>
   <a class="carousel-control-next" href="#tipsSliderIndicators" style="color:orange" role="button" data-slide="next">
-    <i class="fas fa-chevron-right"></i>
+    <i class="fas fa-arrow-right"></i>
     <span class="sr-only">Next</span>
   </a>
 </div>
