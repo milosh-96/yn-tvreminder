@@ -34,7 +34,7 @@ class PushRemind extends Notification
     public function via($notifiable)
     {
         // return ['mail','broadcast',WebPushChannel::class];
-        return [WebPushChannel::class];
+        return ['mail',WebPushChannel::class];
     }
 
     /**
